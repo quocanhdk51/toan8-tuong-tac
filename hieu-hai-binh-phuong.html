@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hiệu hai bình phương – tương tác</title>
+<style>
+  :root { --navy:#1F3A5F; --teal:#12867A; --gold:#E9A23B; --coral:#D9573B; --indigo:#4B4FB8; --bg:#ECEDFB; --ink:#1B2333; --muted:#4A5568; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink); font-family: "Segoe UI", Arial, sans-serif; }
+  body { display: flex; flex-direction: column; }
+  header { display: flex; align-items: center; gap: 12px; padding: 14px 24px; flex-wrap: wrap; }
+  header h1 { margin: 0 12px 0 0; font: 700 30px Cambria, Georgia, serif; color: var(--navy); }
+  .tabs { display: flex; gap: 8px; flex: 1; }
+  button { font: 700 19px "Segoe UI", Arial, sans-serif; border: 0; border-radius: 12px; padding: 10px 18px; cursor: pointer; background: #fff; color: var(--navy); box-shadow: 0 2px 8px rgba(27,35,51,.1); }
+  button.on { background: var(--indigo); color: #fff; }
+  button.go { background: var(--gold); color: var(--ink); }
+  main { flex: 1; padding: 0 24px 20px; min-height: 0; }
+  .tab { display: none; height: 100%; gap: 20px; }
+  .tab.on { display: grid; }
+  .card { background: #fff; border-radius: 18px; box-shadow: 0 4px 16px rgba(27,35,51,.12); padding: 18px 22px; }
+  #t1 { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); }
+  #t1 svg { width: 100%; height: 100%; display: block; }
+  .ctl { display: flex; flex-direction: column; gap: 18px; }
+  .sl { font: 700 26px Cambria, Georgia, serif; color: var(--navy); display: grid; grid-template-columns: 70px 1fr 60px; align-items: center; gap: 10px; }
+  .sl input { width: 100%; height: 28px; accent-color: var(--indigo); }
+  .eq { font: 700 30px Cambria, Georgia, serif; color: var(--navy); line-height: 1.5; }
+  .eq .big { color: var(--coral); }
+  .ok { color: var(--teal); font: 800 24px "Segoe UI", Arial, sans-serif; }
+  .piece { transition: transform 1.2s cubic-bezier(.6,0,.3,1); transform-origin: 0 0; }
+  svg text { font: 700 22px Cambria, Georgia, serif; fill: var(--navy); }
+  #t2, #t3 { grid-template-columns: minmax(0, 1fr); align-content: start; }
+  .row { display: flex; gap: 14px; align-items: center; font: 700 28px Cambria, Georgia, serif; color: var(--navy); flex-wrap: wrap; }
+  .row input { font: 700 28px Cambria, Georgia, serif; width: 150px; padding: 6px 10px; border: 3px solid var(--indigo); border-radius: 10px; color: var(--navy); }
+  .out { font: 700 34px Cambria, Georgia, serif; color: var(--navy); line-height: 1.6; min-height: 120px; }
+  .out .hl { color: var(--coral); }
+  table { border-collapse: collapse; font: 700 26px Cambria, Georgia, serif; color: var(--navy); }
+  td, th { border: 2px solid #C9CCEF; padding: 8px 18px; text-align: center; }
+  th { background: var(--indigo); color: #fff; }
+  tr.hit td { background: #E3F4F1; color: var(--teal); }
+  .warn { font: 600 18px "Segoe UI", Arial, sans-serif; color: var(--muted); font-style: italic; }
+  .nl { width: 100%; height: 120px; }
+@media (max-width: 900px) { #t1 { grid-template-columns: 1fr; } #t1 .card:first-child { height: 50vh; } header h1 { font-size: 24px; } .eq { font-size: 24px; } .out { font-size: 24px; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>Hiệu hai bình phương</h1>
+  <div class="tabs"><button class="on" data-t="t1">Mô hình diện tích</button><button data-t="t2">Tính nhanh</button><button data-t="t3">Giải mã số</button></div>
+  <button id="fs">Toàn màn hình</button>
+</header>
+<main>
+  <section class="tab on" id="t1">
+    <div class="card"><svg id="model" viewBox="0 0 900 560"></svg></div>
+    <div class="card ctl">
+      <div class="sl">a = <input type="range" id="a" min="3" max="14" value="12"><span id="av">12</span></div>
+      <div class="sl">b = <input type="range" id="b" min="1" max="11" value="4"><span id="bv">4</span></div>
+      <button class="go" id="cut">✂ Cắt &amp; ghép</button>
+      <div class="eq" id="eq"></div>
+    </div>
+  </section>
+  <section class="tab" id="t2">
+    <div class="card">
+      <div class="row">Tính nhanh: <input id="x" type="number" value="198"> × <input id="y" type="number" value="202"> <button class="go" id="calc">Tính</button></div>
+      <svg class="nl" id="nl" viewBox="0 0 1000 120"></svg>
+      <div class="out" id="qout"></div>
+    </div>
+  </section>
+  <section class="tab" id="t3">
+    <div class="card">
+      <div class="row">Phân tích N = <input id="N" type="number" value="143"> thành tích hai số <button class="go" id="find">Tìm</button></div>
+      <p class="warn">Ví dụ học tập: cách này (ý tưởng của Fermat) nhanh khi hai thừa số gần nhau – không có nghĩa là phá được mã RSA thật.</p>
+      <table id="tbl"></table>
+      <div class="out" id="fout"></div>
+    </div>
+  </section>
+</main>
+<script>
+const NS = 'http://www.w3.org/2000/svg';
+document.querySelectorAll('[data-t]').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('[data-t]').forEach(x => x.classList.toggle('on', x === b));
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('on', t.id === b.dataset.t));
+}));
+document.getElementById('fs').addEventListener('click', () => document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen());
+
+// ---------- tab 1: area model ----------
+const svg = document.getElementById('model');
+let cut = false;
+function rectEl(x, y, w, h, fill, parent, extra = {}) { const r = document.createElementNS(NS, 'rect'); Object.entries({x, y, width: w, height: h, fill, stroke: '#fff', 'stroke-width': 2, ...extra}).forEach(([k, v]) => r.setAttribute(k, v)); parent.appendChild(r); return r; }
+function text(x, y, s, parent, color) { const t = document.createElementNS(NS, 'text'); t.setAttribute('x', x); t.setAttribute('y', y); t.setAttribute('text-anchor', 'middle'); if (color) t.setAttribute('fill', color); t.textContent = s; parent.appendChild(t); return t; }
+function model() {
+  const aIn = document.getElementById('a'), bIn = document.getElementById('b');
+  let a = +aIn.value; bIn.max = a - 1; let b = Math.min(+bIn.value, a - 1); bIn.value = b;
+  document.getElementById('av').textContent = a; document.getElementById('bv').textContent = b;
+  const s = Math.min(800 / (a + b), 470 / a), ox = 40, oy = 40;
+  svg.innerHTML = '';
+  const g = document.createElementNS(NS, 'g'); g.setAttribute('transform', `translate(${ox},${oy})`); svg.appendChild(g);
+  rectEl(0, 0, a * s, a * s, 'none', g, {stroke: '#9AA7B8', 'stroke-dasharray': '10 8', opacity: cut ? 0.35 : 1});
+  rectEl((a - b) * s, 0, b * s, b * s, '#fff', g, {stroke: '#9AA7B8', 'stroke-dasharray': '10 8', opacity: cut ? 0 : 1});
+  rectEl(0, b * s, a * s, (a - b) * s, '#12867A', g);
+  const strip = document.createElementNS(NS, 'g'); strip.setAttribute('class', 'piece'); g.appendChild(strip);
+  rectEl(0, 0, (a - b) * s, b * s, '#E9A23B', strip);
+  strip.style.transform = cut ? `translate(${(a + b) * s}px, ${b * s}px) rotate(90deg)` : 'none';
+  if (!cut) {
+    text(a * s / 2, a * s + 30, `a = ${a}`, g, '#D9573B');
+    text((a - b) * s + b * s / 2, -10, `b = ${b}`, g, '#D9573B');
+  } else {
+    text((a + b) * s / 2, a * s + 30, `a + b = ${a + b}`, g, '#D9573B');
+    const t = text((a + b) * s + 50, b * s + (a - b) * s / 2 + 8, `a − b = ${a - b}`, g, '#D9573B'); t.setAttribute('text-anchor', 'start');
+  }
+  document.getElementById('eq').innerHTML = `a² − b² = ${a}² − ${b}² = ${a * a} − ${b * b} = <span class="big">${a * a - b * b}</span><br>(a − b)(a + b) = ${a - b} . ${a + b} = <span class="big">${(a - b) * (a + b)}</span><br><span class="ok">✓ Hai cách tính cho cùng một diện tích</span>`;
+}
+['a', 'b'].forEach(id => document.getElementById(id).addEventListener('input', model));
+document.getElementById('cut').addEventListener('click', () => { cut = !cut; document.getElementById('cut').textContent = cut ? '↺ Trở lại hình vuông' : '✂ Cắt & ghép'; model(); });
+model();
+
+// ---------- tab 2: quick multiplication ----------
+function quick() {
+  const x = +document.getElementById('x').value, y = +document.getElementById('y').value, out = document.getElementById('qout'), nl = document.getElementById('nl');
+  nl.innerHTML = '';
+  if ((x + y) % 2) { out.innerHTML = 'Hai số này chưa cách đều một số nguyên – thử cặp khác (ví dụ 48 × 52).'; return; }
+  const m = (x + y) / 2, d = Math.abs(x - y) / 2, lo = Math.min(x, y), hi = Math.max(x, y);
+  const X = v => 100 + (v - lo) / Math.max(1, hi - lo) * 800;
+  nl.innerHTML = `<line x1="60" y1="60" x2="940" y2="60" stroke="#9AA7B8" stroke-width="4"/>` +
+    [[lo, '#1F3A5F'], [m, '#E9A23B'], [hi, '#1F3A5F']].map(([v, c]) => `<circle cx="${X(v)}" cy="60" r="${v === m ? 14 : 10}" fill="${c}"/><text x="${X(v)}" y="105" text-anchor="middle" style="font:700 26px Cambria;fill:${c === '#E9A23B' ? '#B8730F' : '#1F3A5F'}">${v}</text>`).join('') +
+    `<text x="${(X(lo) + X(m)) / 2}" y="40" text-anchor="middle" style="font:700 24px Cambria;fill:#D9573B">− ${d}</text><text x="${(X(hi) + X(m)) / 2}" y="40" text-anchor="middle" style="font:700 24px Cambria;fill:#D9573B">+ ${d}</text>`;
+  out.innerHTML = `${x} × ${y} = (${m} − ${d})(${m} + ${d}) = ${m}² − ${d}² = ${(m * m).toLocaleString('vi-VN')} − ${d * d} = <span class="hl">${(x * y).toLocaleString('vi-VN')}</span>`;
+}
+document.getElementById('calc').addEventListener('click', quick); quick();
+
+// ---------- tab 3: Fermat factorisation (step by step) ----------
+let timer = null;
+function find() {
+  clearInterval(timer);
+  const N = Math.floor(+document.getElementById('N').value), tbl = document.getElementById('tbl'), out = document.getElementById('fout');
+  out.innerHTML = '';
+  tbl.innerHTML = '<tr><th>m</th><th>m²</th><th>m² − N</th><th>Là số chính phương?</th></tr>';
+  if (!(N > 3) || N % 2 === 0) { out.textContent = 'Hãy nhập một số lẻ lớn hơn 3 (ví dụ 143, 221, 391).'; return; }
+  let m = Math.ceil(Math.sqrt(N)), steps = 0;
+  timer = setInterval(() => {
+    const r = m * m - N, k = Math.round(Math.sqrt(r)), ok = k * k === r;
+    const tr = document.createElement('tr'); if (ok) tr.className = 'hit';
+    tr.innerHTML = `<td>${m}</td><td>${m * m}</td><td>${r}</td><td>${ok ? `Có: ${r} = ${k}²` : 'Không'}</td>`;
+    tbl.appendChild(tr);
+    if (ok) {
+      clearInterval(timer);
+      out.innerHTML = `N = ${m}² − ${k}² = (${m} − ${k})(${m} + ${k}) = <span class="hl">${m - k} × ${m + k}</span>`;
+    } else if (++steps >= 8) { clearInterval(timer); out.textContent = 'Chưa tìm thấy sau 8 bước – hai thừa số không gần nhau.'; }
+    m++;
+  }, 900);
+}
+document.getElementById('find').addEventListener('click', find);
+</script>
+</body>
+</html>
