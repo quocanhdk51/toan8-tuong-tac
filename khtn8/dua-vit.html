@@ -42,12 +42,21 @@
   <button id="toggleNames">Nhập tên</button>
   <button class="go" id="start">▶ Bắt đầu</button>
   <button id="reset">↺ Xếp lại</button>
+  <button id="sound">🔊 Âm thanh</button>
 </header>
 <textarea id="names" placeholder="Mỗi dòng một tên (để trống: dùng số thứ tự)"></textarea>
 <div id="river"><div id="finish"></div></div>
 <div id="win"><div class="box"><h2>Chú vịt về đích đầu tiên!</h2><div class="who" id="who"></div><div class="sub" id="whoName"></div>
   <button class="go" id="again">Đua tiếp (bỏ vịt này)</button> <button id="close">Đóng</button></div></div>
 <script>
+// Audio lives in the shared library on R2. Sounds play only after a click (browser autoplay rules).
+const LIB = 'https://pub-67aa60f95e4140dfbc58b0df90062a85.r2.dev/audio-library/';
+let soundOn = true, bgm = null;
+const audioCache = {};
+function snd(path, vol = 1) { const a = audioCache[path] ?? (audioCache[path] = new Audio(LIB + path)); a.volume = vol; a.currentTime = 0; return a; }
+function play(path, vol = 1) { if (!soundOn) return Promise.resolve(); const a = snd(path, vol); return a.play().then(() => new Promise((r) => { a.onended = r; a.onerror = r; })).catch(() => {}); }
+function stopBgm() { if (bgm) { bgm.pause(); bgm = null; } }
+const numPath = (n) => n <= 60 ? `voice/so-vit/so-${String(n).padStart(2, '0')}.mp3` : `voice/so-vit/so-${String(n).padStart(3, '0')}.mp3`;
 const river = document.getElementById('river');
 const duckSvg = (c) => `<svg viewBox="0 0 64 52"><ellipse cx="30" cy="34" rx="24" ry="14" fill="${c}"/><circle cx="46" cy="16" r="11" fill="${c}"/><path d="M55 15 l9 3 -9 4z" fill="#FF8F00"/><circle cx="49" cy="13" r="2.6" fill="#222"/><path d="M14 30 q10 -10 20 2" fill="none" stroke="#E6B800" stroke-width="3"/></svg>`;
 let ducks = [], racing = false, removed = new Set(), raf = 0;
@@ -72,9 +81,12 @@ function confetti() {
   const cs = ['#FFD23F', '#E8304A', '#3D8B3D', '#29B6F6', '#9B5CC4'];
   for (let i = 0; i < 140; i++) { const c = document.createElement('div'); c.className = 'conf'; c.style.left = Math.random() * 100 + 'vw'; c.style.background = cs[i % cs.length]; c.style.animationDuration = 2 + Math.random() * 2.5 + 's'; c.style.animationDelay = Math.random() * .6 + 's'; document.body.appendChild(c); setTimeout(() => c.remove(), 5500); }
 }
-function start() {
+async function start() {
   if (racing) return;
   setup(); racing = true; document.getElementById('start').disabled = true;
+  await play('voice/dua-vit/chuan-bi-xuat-phat.mp3');
+  play('sfx/sung-xuat-phat.mp3', 0.7);
+  if (soundOn) { bgm = snd('music/dem-nguoc-tro-choi.mp3', 0.35); bgm.loop = true; bgm.play().catch(() => {}); }
   const finishX = river.clientWidth * 0.93 - 64, t0 = performance.now();
   const live = ducks.filter(d => !d.out);
   live.forEach(d => { d.base = 0.55 + Math.random() * 0.5; d.burst = Math.random() * 10; });
@@ -93,11 +105,16 @@ function start() {
   raf = requestAnimationFrame(step);
 }
 let last = null;
-function showWinner(d) {
+async function showWinner(d) {
   last = d; d.el.style.filter = 'drop-shadow(0 0 10px #fff)';
+  stopBgm();
+  await play('voice/dua-vit/ve-dich-dau-tien.mp3');
   document.getElementById('who').textContent = 'Số ' + d.id;
   document.getElementById('whoName').textContent = d.name ? d.name : 'giành quyền trả lời câu hỏi!';
   document.getElementById('win').style.display = 'flex'; confetti();
+  play('sfx/phao-giay.mp3', 0.6); play('sfx/vo-tay.mp3', 0.5);
+  if (d.id <= 100) await play(numPath(d.id));
+  await play('voice/dua-vit/chuc-mung-tra-loi.mp3');
 }
 document.getElementById('start').onclick = start;
 document.getElementById('reset').onclick = () => { removed.clear(); setup(); };
@@ -105,6 +122,7 @@ document.getElementById('again').onclick = () => { if (last) removed.add(last.id
 document.getElementById('close').onclick = () => { document.getElementById('win').style.display = 'none'; };
 document.getElementById('toggleNames').onclick = () => { const t = document.getElementById('names'); t.style.display = t.style.display === 'block' ? 'none' : 'block'; if (t.style.display === 'none') setup(); };
 document.getElementById('count').onchange = setup;
+document.getElementById('sound').onclick = (e) => { soundOn = !soundOn; e.target.textContent = soundOn ? '🔊 Âm thanh' : '🔇 Tắt tiếng'; if (!soundOn) stopBgm(); };
 window.onresize = () => { if (!racing) setup(); };
 setup();
 </script>
