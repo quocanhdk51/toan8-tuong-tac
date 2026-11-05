@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Đua vịt – Lớp 8B</title>
+<style>
+  :root { --navy:#1F3A5F; --gold:#FFD23F; --green:#3D8B3D; --water:#4FC3F7; --water2:#29B6F6; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; font-family: "Segoe UI", Arial, sans-serif; background: #E9F4E6; color: var(--navy); overflow: hidden; }
+  body { display: flex; flex-direction: column; }
+  header { display: flex; align-items: center; gap: 14px; padding: 10px 18px; flex-wrap: wrap; }
+  h1 { margin: 0; font: 800 30px "Segoe UI", Arial, sans-serif; color: var(--green); flex: 1; }
+  label { font-weight: 700; font-size: 18px; }
+  input[type=number] { width: 80px; font: 700 20px inherit; padding: 6px 8px; border-radius: 10px; border: 2px solid #9CCC65; }
+  button { font: 800 19px "Segoe UI", Arial, sans-serif; border: 0; border-radius: 12px; padding: 10px 18px; cursor: pointer; background: #fff; color: var(--navy); box-shadow: 0 3px 0 rgba(0,0,0,.15); }
+  button.go { background: var(--gold); }
+  button:disabled { opacity: .5; cursor: default; }
+  #names { display: none; position: absolute; right: 18px; top: 64px; width: 320px; height: 60vh; z-index: 5; font: 16px "Segoe UI"; padding: 10px; border-radius: 12px; border: 2px solid #9CCC65; }
+  #river { position: relative; flex: 1; margin: 0 18px 18px; border-radius: 22px; overflow: hidden;
+    background: repeating-linear-gradient(90deg, rgba(255,255,255,.12) 0 40px, transparent 40px 120px), linear-gradient(180deg, var(--water), var(--water2)); }
+  #finish { position: absolute; top: 0; bottom: 0; right: 7%; width: 18px; background: repeating-linear-gradient(0deg, #fff 0 18px, #222 18px 36px); opacity: .85; }
+  .duck { position: absolute; width: 64px; height: 52px; transition: none; }
+  .duck svg { width: 100%; height: 100%; }
+  .duck b { position: absolute; left: 14px; top: 20px; width: 28px; text-align: center; font: 800 14px "Segoe UI"; color: #5A3E00; }
+  .duck .nm { position: absolute; left: 66px; top: 14px; white-space: nowrap; font: 700 14px "Segoe UI"; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,.5); }
+  .out { opacity: .25; }
+  #win { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; background: rgba(15,30,50,.55); z-index: 10; }
+  #win .box { background: #fff; border-radius: 26px; padding: 34px 54px; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,.3); animation: pop .5s cubic-bezier(.2,1.6,.4,1); }
+  #win .box h2 { margin: 0 0 10px; font: 800 30px "Segoe UI"; color: var(--green); }
+  #win .who { font: 900 84px "Segoe UI"; color: #E8304A; line-height: 1.1; }
+  #win .sub { font: 700 24px "Segoe UI"; margin: 8px 0 20px; }
+  @keyframes pop { from { transform: scale(.4); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .conf { position: fixed; width: 12px; height: 18px; z-index: 11; top: -20px; animation: fall linear forwards; }
+  @keyframes fall { to { transform: translateY(110vh) rotate(720deg); } }
+</style>
+</head>
+<body>
+<header>
+  <h1>🏁 Cuộc đua của các chú vịt lớp 8B</h1>
+  <label>Số vịt: <input id="count" type="number" min="2" max="80" value="54"></label>
+  <button id="toggleNames">Nhập tên</button>
+  <button class="go" id="start">▶ Bắt đầu</button>
+  <button id="reset">↺ Xếp lại</button>
+</header>
+<textarea id="names" placeholder="Mỗi dòng một tên (để trống: dùng số thứ tự)"></textarea>
+<div id="river"><div id="finish"></div></div>
+<div id="win"><div class="box"><h2>Chú vịt về đích đầu tiên!</h2><div class="who" id="who"></div><div class="sub" id="whoName"></div>
+  <button class="go" id="again">Đua tiếp (bỏ vịt này)</button> <button id="close">Đóng</button></div></div>
+<script>
+const river = document.getElementById('river');
+const duckSvg = (c) => `<svg viewBox="0 0 64 52"><ellipse cx="30" cy="34" rx="24" ry="14" fill="${c}"/><circle cx="46" cy="16" r="11" fill="${c}"/><path d="M55 15 l9 3 -9 4z" fill="#FF8F00"/><circle cx="49" cy="13" r="2.6" fill="#222"/><path d="M14 30 q10 -10 20 2" fill="none" stroke="#E6B800" stroke-width="3"/></svg>`;
+let ducks = [], racing = false, removed = new Set(), raf = 0;
+function names() { const t = document.getElementById('names').value.split('\n').map(s => s.trim()).filter(Boolean); return t; }
+function setup() {
+  cancelAnimationFrame(raf); racing = false;
+  river.querySelectorAll('.duck').forEach(d => d.remove());
+  const n = Math.max(2, Math.min(80, +document.getElementById('count').value || 54)), nm = names();
+  const W = river.clientWidth, H = river.clientHeight, cols = Math.ceil(n / Math.max(1, Math.floor((H - 30) / 34)));
+  const rows = Math.ceil(n / cols);
+  ducks = [];
+  for (let i = 0; i < n; i++) {
+    const el = document.createElement('div'); el.className = 'duck' + (removed.has(i + 1) ? ' out' : '');
+    el.innerHTML = duckSvg(removed.has(i + 1) ? '#ccc' : '#FFD23F') + `<b>${i + 1}</b>` + (nm[i] ? `<span class="nm">${nm[i]}</span>` : '');
+    river.appendChild(el);
+    const r = i % rows, c = Math.floor(i / rows);
+    const d = { id: i + 1, name: nm[i] || '', el, x: 10 + c * 72, y: 8 + r * ((H - 60) / Math.max(1, rows - 1 || 1)), v: 0, phase: Math.random() * 6, out: removed.has(i + 1) };
+    el.style.transform = `translate(${d.x}px, ${d.y}px)`; ducks.push(d);
+  }
+}
+function confetti() {
+  const cs = ['#FFD23F', '#E8304A', '#3D8B3D', '#29B6F6', '#9B5CC4'];
+  for (let i = 0; i < 140; i++) { const c = document.createElement('div'); c.className = 'conf'; c.style.left = Math.random() * 100 + 'vw'; c.style.background = cs[i % cs.length]; c.style.animationDuration = 2 + Math.random() * 2.5 + 's'; c.style.animationDelay = Math.random() * .6 + 's'; document.body.appendChild(c); setTimeout(() => c.remove(), 5500); }
+}
+function start() {
+  if (racing) return;
+  setup(); racing = true; document.getElementById('start').disabled = true;
+  const finishX = river.clientWidth * 0.93 - 64, t0 = performance.now();
+  const live = ducks.filter(d => !d.out);
+  live.forEach(d => { d.base = 0.55 + Math.random() * 0.5; d.burst = Math.random() * 10; });
+  function step(now) {
+    const t = (now - t0) / 1000;
+    let winner = null;
+    for (const d of live) {
+      const surge = Math.max(0, Math.sin(t * 1.3 + d.burst)) * 0.9 + Math.random() * 0.5;
+      d.x += (d.base + surge) * 2.2 * Math.min(1, t / 1.2);
+      d.el.style.transform = `translate(${d.x}px, ${d.y + Math.sin(t * 6 + d.phase) * 3}px) rotate(${Math.sin(t * 8 + d.phase) * 4}deg)`;
+      if (d.x >= finishX && !winner) winner = d;
+    }
+    if (winner) { racing = false; document.getElementById('start').disabled = false; showWinner(winner); return; }
+    raf = requestAnimationFrame(step);
+  }
+  raf = requestAnimationFrame(step);
+}
+let last = null;
+function showWinner(d) {
+  last = d; d.el.style.filter = 'drop-shadow(0 0 10px #fff)';
+  document.getElementById('who').textContent = 'Số ' + d.id;
+  document.getElementById('whoName').textContent = d.name ? d.name : 'giành quyền trả lời câu hỏi!';
+  document.getElementById('win').style.display = 'flex'; confetti();
+}
+document.getElementById('start').onclick = start;
+document.getElementById('reset').onclick = () => { removed.clear(); setup(); };
+document.getElementById('again').onclick = () => { if (last) removed.add(last.id); document.getElementById('win').style.display = 'none'; setup(); };
+document.getElementById('close').onclick = () => { document.getElementById('win').style.display = 'none'; };
+document.getElementById('toggleNames').onclick = () => { const t = document.getElementById('names'); t.style.display = t.style.display === 'block' ? 'none' : 'block'; if (t.style.display === 'none') setup(); };
+document.getElementById('count').onchange = setup;
+window.onresize = () => { if (!racing) setup(); };
+setup();
+</script>
+</body>
+</html>
