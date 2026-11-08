@@ -1,0 +1,122 @@
+{
+ "title": "Toán 6 – Luyện tập chung (Bài 16–17)",
+ "subtitle": "Kết nối tri thức · Chương III",
+ "points": 10,
+ "time": 20,
+ "questions": [
+  {
+   "type": "mcq",
+   "text": "Tính (−6) · 7:",
+   "options": [
+    "42",
+    "−13",
+    "−42",
+    "13"
+   ],
+   "answer": 2,
+   "explain": "Khác dấu: nhân phần số tự nhiên rồi đặt dấu −: −(6 · 7) = −42."
+  },
+  {
+   "type": "tf",
+   "text": "Tích của hai số nguyên âm là một số nguyên dương.",
+   "answer": true,
+   "time": 15,
+   "explain": "Đúng. Hai số cùng dấu thì tích dương: (−*m*) · (−*n*) = *m* · *n*."
+  },
+  {
+   "type": "fill",
+   "text": "Tính (−10) · (−15).",
+   "answer": "150",
+   "time": 30,
+   "explain": "Cùng dấu: 10 · 15 = 150."
+  },
+  {
+   "type": "mcq",
+   "text": "Tích (−1) · (−2) · (−3) · (−4) · (−5) bằng:",
+   "options": [
+    "120",
+    "−15",
+    "0",
+    "−120"
+   ],
+   "answer": 3,
+   "explain": "Có 5 thừa số âm (số lẻ) nên tích âm: −(1 · 2 · 3 · 4 · 5) = −120."
+  },
+  {
+   "type": "fill",
+   "text": "Tính một cách hợp lí: (−154) · (−235) + 154 · (−35).",
+   "answer": "30 800",
+   "time": 30,
+   "explain": "= 154 · 235 + 154 · (−35) = 154 · (235 − 35) = 154 · 200 = 30 800."
+  },
+  {
+   "type": "pick",
+   "text": "Chạm vào **tất cả** các ước của −6 rồi bấm “Chốt”.",
+   "items": [
+    "−3",
+    "4",
+    "2",
+    "−6"
+   ],
+   "answer": [
+    0,
+    2,
+    3
+   ],
+   "time": 30,
+   "explain": "Ước của −6 là ±1; ±2; ±3; ±6. Số 4 không chia hết −6."
+  },
+  {
+   "type": "mcq",
+   "text": "Kết quả của (−24) : (−6) là:",
+   "options": [
+    "−4",
+    "4",
+    "18",
+    "−18"
+   ],
+   "answer": 1,
+   "explain": "Cùng dấu nên thương dương: 24 : 6 = 4. Kiểm: (−6) · 4 = −24."
+  },
+  {
+   "type": "tf",
+   "text": "Có hai số nguyên *a*, *b* khác nhau mà *a* ⋮ *b* và *b* ⋮ *a*.",
+   "answer": true,
+   "time": 15,
+   "explain": "Đúng: ví dụ 3 và −3 (3 = (−3) · (−1) và −3 = 3 · (−1)). Với số tự nhiên thì không có."
+  },
+  {
+   "type": "fill",
+   "text": "Có bao nhiêu bội của 4 lớn hơn −20 và nhỏ hơn 20?",
+   "answer": "9",
+   "time": 30,
+   "explain": "−16; −12; −8; −4; 0; 4; 8; 12; 16 (−20 và 20 bị loại)."
+  },
+  {
+   "type": "mcq",
+   "text": "Giá trị của *A* = 5*ab* − 3(*a* + *b*) với *a* = 4, *b* = −3 là:",
+   "options": [
+    "57",
+    "−57",
+    "63",
+    "−63"
+   ],
+   "answer": 3,
+   "explain": "5 · 4 · (−3) = −60; 3 · (4 + (−3)) = 3; A = −60 − 3 = −63."
+  },
+  {
+   "type": "fill",
+   "text": "Tính (−12) · (7 − 72) − 25 · (55 − 43).",
+   "answer": "480",
+   "time": 30,
+   "explain": "(−12) · (−65) − 25 · 12 = 780 − 300 = 480."
+  },
+  {
+   "type": "fill",
+   "text": "Mỗi sản phẩm đạt được 50 000 đồng, mỗi sản phẩm không đạt bị phạt 10 000 đồng. Công nhân làm được 230 sản phẩm đạt và 8 sản phẩm không đạt được lĩnh bao nhiêu đồng?",
+   "answer": "11 420 000",
+   "time": 30,
+   "explain": "230 · 50 000 + 8 · (−10 000) = 11 500 000 − 80 000 = 11 420 000."
+  }
+ ]
+}
