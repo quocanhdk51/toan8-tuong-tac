@@ -1,0 +1,20 @@
+{
+  "title": "Toán 6 – Luyện tập chung (Bài 11–12)",
+  "subtitle": "Kết nối tri thức · Chương II",
+  "points": 10,
+  "time": 20,
+  "questions": [
+    {"type":"mcq","text":"ƯCLN(60, 90) bằng:","options":["30","15","10","60"],"answer":0,"explain":"60 = 2² · 3 · 5; 90 = 2 · 3² · 5. Thừa số chung với số mũ nhỏ nhất: 2 · 3 · 5 = 30."},
+    {"type":"mcq","text":"Tập hợp ƯC(12, 18) là:","options":["{1; 2; 3; 4; 6}","{6; 12; 18}","{1; 2; 3; 6}","{1; 2; 3; 6; 9; 18}"],"answer":2,"explain":"Ư(12) = {1; 2; 3; 4; 6; 12}, Ư(18) = {1; 2; 3; 6; 9; 18}. Chung cả hai: 1; 2; 3; 6."},
+    {"type":"tf","text":"ƯCLN(8, 9) = 1 nên 8 và 9 là hai số nguyên tố cùng nhau.","answer":true,"time":15,"explain":"Đúng. Hai số có ƯCLN bằng 1 là hai số nguyên tố cùng nhau, dù mỗi số tự nó là hợp số."},
+    {"type":"fill","text":"Tìm số tự nhiên *a* lớn nhất sao cho 18 ⋮ *a*, 45 ⋮ *a* và 135 ⋮ *a*.","answer":"9","time":30,"explain":"*a* = ƯCLN(18, 45, 135). 18 = 2 · 3²; 45 = 3² · 5; 135 = 3³ · 5. Chung: 3², nên *a* = 9."},
+    {"type":"mcq","text":"Ba đèn sáng cùng lúc lúc 6 giờ; đèn thứ nhất cứ 6 giây, đèn thứ hai cứ 8 giây, đèn thứ ba cứ 10 giây sáng một lần. Sau bao lâu ba đèn lại cùng sáng?","options":["24 giây","60 giây","240 giây","120 giây"],"answer":3,"explain":"BCNN(6, 8, 10) = 2³ · 3 · 5 = 120 giây, tức 2 phút."},
+    {"type":"fill","text":"Tìm BCNN(9, 12).","answer":"36","time":30,"explain":"9 = 3²; 12 = 2² · 3. BCNN = 2² · 3² = 36."},
+    {"type":"pick","text":"Chạm vào **tất cả** các phân số tối giản rồi bấm “Chốt”.","items":["15/17","70/105","8/15","33/77"],"answer":[0,2],"time":30,"explain":"15/17 và 8/15 có ƯCLN của tử và mẫu bằng 1. ƯCLN(70, 105) = 35 và ƯCLN(33, 77) = 11 nên hai phân số kia chưa tối giản."},
+    {"type":"mcq","text":"Với hai số tự nhiên *a*, *b* khác 0, tích ƯCLN(*a*, *b*) · BCNN(*a*, *b*) bằng:","options":["*a* + *b*","*a* · *b*","*a* : *b*","*a* − *b*"],"answer":1,"explain":"Ví dụ: 9 và 12 có ƯCLN = 3, BCNN = 36, 3 · 36 = 108 = 9 · 12. Luôn đúng: ƯCLN · BCNN = *a* · *b*."},
+    {"type":"fill","text":"Quy đồng mẫu hai phân số 4/9 và 7/15 với mẫu chung nhỏ nhất. Mẫu chung là bao nhiêu?","answer":"45","time":30,"explain":"BCNN(9, 15) = 45, nên 4/9 = 20/45 và 7/15 = 21/45."},
+    {"type":"mcq","text":"Ba tấm gỗ dài 56 dm, 48 dm, 40 dm được cắt thành các thanh bằng nhau, không thừa mẩu nào. Thanh dài nhất là:","options":["8 dm","4 dm","6 dm","16 dm"],"answer":0,"explain":"ƯCLN(56, 48, 40) = 8 dm (được 7 + 6 + 5 = 18 thanh)."},
+    {"type":"fill","text":"Học sinh lớp 6A xếp hàng 2, hàng 3, hàng 7 đều vừa đủ. Biết số học sinh nhỏ hơn 45. Lớp có bao nhiêu học sinh?","answer":"42","time":30,"explain":"Là bội chung của 2, 3, 7: BCNN = 42 < 45 (bội kế tiếp là 84 > 45)."},
+    {"type":"mcq","text":"Hai vận động viên chạy cùng chiều, xuất phát cùng lúc; một vòng người thứ nhất hết 360 giây, người thứ hai hết 420 giây. Sau bao nhiêu phút họ gặp lại nhau?","options":["21 phút","36 phút","42 phút","60 phút"],"answer":2,"explain":"BCNN(360, 420) = 2³ · 3² · 5 · 7 = 2 520 giây = 42 phút."}
+  ]
+}

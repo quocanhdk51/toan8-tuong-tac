@@ -1,0 +1,27 @@
+{
+  "title": "Toán 6 – Bài tập cuối chương II",
+  "subtitle": "Kết nối tri thức · Ôn tập Chương II",
+  "points": 10,
+  "time": 20,
+  "questions": [
+    {"type":"mcq","text":"Tập hợp các ước của 20 là:","options":["Ư(20) = {2; 4; 5; 10}","Ư(20) = {1; 2; 4; 5; 10; 20}","Ư(20) = {0; 20; 40; 60; …}","Ư(20) = {1; 2; 4; 10; 20}"],"answer":1,"explain":"Chia 20 cho 1; 2; …; 20: các số chia hết là 1; 2; 4; 5; 10; 20. Còn 0; 20; 40; … là các bội của 20."},
+    {"type":"tf","text":"Nếu *a* ⋮ 6 và *b* ⋮ 6 thì (*a* + *b*) ⋮ 6.","answer":true,"time":15,"explain":"Đúng. Mọi số hạng chia hết cho 6 thì tổng chia hết cho 6."},
+    {"type":"mcq","text":"Không tính, tổng nào sau đây **không** chia hết cho 9?","options":["27 + 45","18 + 36","81 − 9","90 + 17"],"answer":3,"explain":"90 ⋮ 9 nhưng 17 ∤ 9 nên 90 + 17 ∤ 9. Ba tổng còn lại có mọi số hạng chia hết cho 9."},
+    {"type":"pick","text":"Chạm vào **tất cả** các số chia hết cho cả 2 và 5 rồi bấm “Chốt”.","items":["120","245","300","1 005"],"answer":[0,2],"time":30,"explain":"Chia hết cho cả 2 và 5 là số tận cùng bằng 0: 120 và 300. 245 và 1 005 tận cùng 5 (lẻ)."},
+    {"type":"fill","text":"Trong tập hợp {50; 108; 189; 1 234; 2 019; 2 020} có bao nhiêu số *x* để (*x* + 36) ⋮ 9?","answer":"2","time":30,"explain":"36 ⋮ 9 nên cần *x* ⋮ 9: 108 (1+0+8 = 9) và 189 (1+8+9 = 18). Các số còn lại có tổng chữ số 5; 10; 12; 4 nên không."},
+    {"type":"fill","text":"Thay dấu ∗ bằng chữ số **lớn nhất** để số 4∗5 chia hết cho 9.","answer":"9","time":30,"explain":"4 + ∗ + 5 = 9 + ∗ ⋮ 9 nên ∗ = 0 hoặc 9. Chữ số lớn nhất là 9 (495 = 9 · 55)."},
+    {"type":"tf","text":"Mọi số nguyên tố đều là số lẻ.","answer":false,"time":15,"explain":"Sai. Số 2 là số nguyên tố và là số chẵn duy nhất trong các số nguyên tố."},
+    {"type":"mcq","text":"Phân tích 140 ra thừa số nguyên tố ta được:","options":["2 · 70","4 · 5 · 7","2² · 5 · 7","2 · 5 · 14"],"answer":2,"explain":"140 = 2 · 70 = 2 · 2 · 35 = 2² · 5 · 7. Các phương án khác còn thừa số là hợp số (70; 4; 14)."},
+    {"type":"fill","text":"Tính 14² + 5² + 2² rồi cho biết kết quả (kết quả này phân tích được thành 3² · 5²).","answer":"225","time":30,"explain":"196 + 25 + 4 = 225 = 3² · 5²."},
+    {"type":"mcq","text":"ƯCLN(36, 54) bằng:","options":["9","6","108","18"],"answer":3,"explain":"36 = 2² · 3²; 54 = 2 · 3³. Chung: 2 và 3², nên ƯCLN = 2 · 9 = 18."},
+    {"type":"fill","text":"Tìm BCNN(36, 54).","answer":"108","time":30,"explain":"BCNN = 2² · 3³ = 4 · 27 = 108. (Kiểm: 18 · 108 = 1 944 = 36 · 54.)"},
+    {"type":"mcq","text":"79 và 97 là hai số nguyên tố. BCNN(79, 97) bằng:","options":["7 663","176","1","79"],"answer":0,"explain":"Hai số nguyên tố khác nhau có ƯCLN = 1 nên BCNN bằng tích: 79 · 97 = 7 663."},
+    {"type":"mcq","text":"Rút gọn phân số 27/123 về phân số tối giản:","options":["3/41","9/41","9/123","27/41"],"answer":1,"explain":"ƯCLN(27, 123) = 3 (123 = 3 · 41). Chia cả tử và mẫu cho 3: 9/41."},
+    {"type":"mcq","text":"Quy đồng mẫu hai phân số 4/9 và 7/15 (mẫu chung nhỏ nhất), ta được:","options":["12/27 và 7/27","28/135 và 63/135","20/45 và 21/45","4/45 và 7/45"],"answer":2,"explain":"BCNN(9, 15) = 45. 4/9 = 20/45; 7/15 = 21/45."},
+    {"type":"fill","text":"Mai có 12 quả cam, 18 quả xoài, 30 quả bơ, chia đều vào các túi sao cho túi nào cũng đủ ba loại. Nhiều nhất chia được bao nhiêu túi?","answer":"6","time":30,"explain":"ƯCLN(12, 18, 30) = 6 (mỗi túi 2 cam, 3 xoài, 5 bơ)."},
+    {"type":"mcq","text":"Bác Nam cứ 3 tháng thay dầu, cứ 6 tháng xoay lốp xe một lần; hai việc cùng làm vào tháng 4. Lần gần nhất tiếp theo làm cùng lúc cả hai việc vào tháng:","options":["Tháng 10","Tháng 7","Tháng 12","Tháng 5"],"answer":0,"explain":"BCNN(3, 6) = 6 nên sau 6 tháng: tháng 4 + 6 = tháng 10."},
+    {"type":"fill","text":"Tìm *a* + *b*, biết hai số 3^{*a*} · 5² và 3³ · 5^{*b*} có ƯCLN là 3³ · 5² và BCNN là 3⁴ · 5³ (viết a + b là một số).","answer":"7","time":30,"explain":"BCNN lấy số mũ lớn nhất: 3⁴ nên *a* = 4; 5³ nên *b* = 3. Vậy *a* + *b* = 7."},
+    {"type":"fill","text":"Số vịt chưa đến 200 con: xếp hàng 2, 3, 4 đều dư 1; hàng 5 thì thiếu 1 con; xếp hàng 7 thì vừa đủ. Có bao nhiêu con vịt?","answer":"49","time":30,"explain":"Số vịt − 1 chia hết cho 2, 3, 4 nên số vịt = 12*k* + 1; số vịt + 1 chia hết cho 5; số vịt chia hết cho 7. Các số dạng 12*k* + 1 chia 5 dư 4: 49; 109; 169. Trong đó chỉ 49 = 7 · 7 chia hết cho 7."},
+    {"type":"fill","text":"Tìm số tự nhiên lớn hơn 1, nhỏ nhất, mà chia cho 2; 3; 4; 5; 6 đều dư 1 (thử thách trong video).","answer":"61","time":30,"explain":"Số trừ 1 là bội chung của 2; 3; 4; 5; 6: BCNN = 60. Số cần tìm là 60 + 1 = 61."}
+  ]
+}

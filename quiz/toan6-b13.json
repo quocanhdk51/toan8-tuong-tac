@@ -1,0 +1,147 @@
+{
+ "title": "Toán 6 – Bài 13. Tập hợp các số nguyên",
+ "subtitle": "Kết nối tri thức · Chương III",
+ "points": 10,
+ "time": 20,
+ "questions": [
+  {
+   "type": "mcq",
+   "text": "Số −3 được đọc là gì?",
+   "options": [
+    "Âm ba",
+    "Trừ ba",
+    "Ba âm",
+    "Dương ba"
+   ],
+   "answer": 0,
+   "explain": "Số −3 đọc là “âm ba”. Các số có dấu “−” đứng trước là các số nguyên âm."
+  },
+  {
+   "type": "mcq",
+   "text": "Nhiệt độ **dưới** 0 °C được biểu thị bằng loại số nào?",
+   "options": [
+    "Số nguyên dương",
+    "Số 0",
+    "Số nguyên âm",
+    "Số tự nhiên"
+   ],
+   "answer": 2,
+   "explain": "Số dương biểu thị nhiệt độ trên 0 °C, số âm biểu thị nhiệt độ dưới 0 °C. Ví dụ −5 °C là “âm năm độ C”."
+  },
+  {
+   "type": "tf",
+   "text": "Số 0 là số nguyên dương.",
+   "answer": false,
+   "time": 15,
+   "explain": "Sai. Số 0 không là số nguyên dương, cũng không là số nguyên âm."
+  },
+  {
+   "type": "pick",
+   "text": "Chạm vào **tất cả** các số nguyên âm, rồi bấm “Chốt”.",
+   "items": [
+    "−7",
+    "0",
+    "12",
+    "−1",
+    "+5"
+   ],
+   "answer": [
+    0,
+    3
+   ],
+   "time": 25,
+   "explain": "Số nguyên âm là các số có dấu “−” đứng trước: −7 và −1. Số 0 không âm; 12 và +5 là số nguyên dương."
+  },
+  {
+   "type": "mcq",
+   "text": "Tập hợp ℤ gồm những số nào?",
+   "options": [
+    "Các số nguyên dương và số 0",
+    "Các số nguyên âm và các số nguyên dương",
+    "Chỉ các số nguyên âm",
+    "Các số nguyên âm, số 0 và các số nguyên dương"
+   ],
+   "answer": 3,
+   "explain": "ℤ = {…; −3; −2; −1; 0; 1; 2; 3; …} gồm số nguyên âm, số 0 và số nguyên dương."
+  },
+  {
+   "type": "mcq",
+   "text": "Độ cao của rãnh Mariana là −10 971 m. Điều đó có nghĩa là gì?",
+   "options": [
+    "Rãnh cao hơn mực nước biển 10 971 m",
+    "Rãnh ngang bằng mực nước biển",
+    "Rãnh cao hơn đỉnh Phan-xi-păng",
+    "Rãnh sâu 10 971 m dưới mực nước biển"
+   ],
+   "answer": 3,
+   "explain": "Số âm chỉ độ cao dưới mực nước biển (mực nước biển quy ước là 0 m). Rãnh Mariana sâu 10 971 m."
+  },
+  {
+   "type": "mcq",
+   "text": "Trên trục số nằm ngang, các số nguyên âm nằm ở đâu so với gốc *O*?",
+   "options": [
+    "Bên trái gốc *O*",
+    "Bên phải gốc *O*",
+    "Trùng với gốc *O*",
+    "Phía trên gốc *O*"
+   ],
+   "answer": 0,
+   "explain": "Chiều từ trái sang phải là chiều dương; chiều ngược lại là chiều âm. Số nguyên âm nằm trước (bên trái) gốc *O*."
+  },
+  {
+   "type": "mcq",
+   "text": "Trên trục số, điểm −4 nằm cách gốc *O* bao nhiêu đơn vị?",
+   "options": [
+    "−4 đơn vị",
+    "0 đơn vị",
+    "4 đơn vị",
+    "8 đơn vị"
+   ],
+   "answer": 2,
+   "explain": "Khoảng cách từ điểm −4 đến gốc *O* là 4 đơn vị (về phía chiều âm). Khoảng cách không là số âm."
+  },
+  {
+   "type": "mcq",
+   "text": "Điền dấu thích hợp: −12 ? −15",
+   "options": [
+    "<",
+    ">",
+    "=",
+    "không so sánh được"
+   ],
+   "answer": 1,
+   "explain": "Trên trục số, điểm −12 nằm sau điểm −15 nên −12 > −15. Với hai số nguyên dương 15 > 12 thì −15 < −12."
+  },
+  {
+   "type": "pick",
+   "text": "Chạm vào **tất cả** các số **lớn hơn** −1, rồi bấm “Chốt”.",
+   "items": [
+    "−5",
+    "0",
+    "2",
+    "−1",
+    "−3"
+   ],
+   "answer": [
+    1,
+    2
+   ],
+   "time": 25,
+   "explain": "Các số nằm sau điểm −1 trên trục số là 0 và 2. Số −1 bằng chính nó; −5 và −3 nhỏ hơn −1."
+  },
+  {
+   "type": "fill",
+   "text": "Sắp xếp các số 2; −4; 0; 5; −11; −3; 9 theo thứ tự tăng dần.",
+   "answer": "−11 < −4 < −3 < 0 < 2 < 5 < 9",
+   "time": 30,
+   "explain": "Số âm nhỏ hơn 0 và nhỏ hơn mọi số dương. Trong các số âm: 11 > 4 > 3 nên −11 < −4 < −3."
+  },
+  {
+   "type": "fill",
+   "text": "Liệt kê các phần tử của tập hợp B = {*x* ∈ ℤ | −2 < *x* ≤ 4}.",
+   "answer": "B = {−1; 0; 1; 2; 3; 4}",
+   "time": 30,
+   "explain": "*x* > −2 (không lấy −2) và *x* ≤ 4 (lấy cả 4). Các số nguyên đó là −1; 0; 1; 2; 3; 4."
+  }
+ ]
+}
