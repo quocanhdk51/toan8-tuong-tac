@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ai nhanh hơn – Đấu trường kiến thức</title>
+<style>
+:root{--coral:#D9573B;--teal:#12867A;--indigo:#4B4FB8;--gold:#E9A23B;--navy:#1F3A5F;--paper:#FBF8F1;--ink:#1F3A5F;--mut:#5B6B80;--line:#D9DFE8;--ok:#0E7C4A;--okbg:#DDF3E8;--bad:#B3341C;--badbg:#FBE1DA}
+*{box-sizing:border-box}
+html{font-size:max(15px,1.46vw)}
+@media (min-width:1500px) and (min-aspect-ratio:3/2){html{font-size:min(1.46vw,2.6vh)}}
+html,body{margin:0;min-height:100%}
+body{font-family:"Segoe UI","Be Vietnam Pro",system-ui,Arial,sans-serif;color:var(--ink);background-color:var(--paper);
+ background-image:linear-gradient(rgba(31,58,95,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(31,58,95,.055) 1px,transparent 1px);background-size:2.2rem 2.2rem;line-height:1.35}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:.18rem solid var(--indigo);outline-offset:.12rem}
+#app{min-height:100vh;display:flex;flex-direction:column}
+.screen{display:none;flex:1;flex-direction:column}
+.screen.on{display:flex}
+.btn{border:0;border-radius:.7rem;padding:.55rem 1.1rem;font-weight:800;background:#fff;color:var(--navy);box-shadow:0 .15rem 0 rgba(31,58,95,.2),0 0 0 .08rem var(--line) inset;min-height:2.6rem}
+.btn:hover{filter:brightness(.97)}.btn:active{transform:translateY(1px)}
+.btn.pri{background:var(--navy);color:#fff;box-shadow:0 .15rem 0 #0f2238}
+.btn.gold{background:var(--gold);color:#2b1c00;box-shadow:0 .15rem 0 #b97d1d}
+.btn:disabled{opacity:.45;cursor:default}
+.sub{color:var(--mut)}
+sup{font-size:.65em;line-height:0}
+/* start */
+#start{align-items:center;justify-content:center;padding:1.5rem}
+.card{background:#fff;border-radius:1.2rem;box-shadow:0 .6rem 2rem rgba(31,58,95,.14),0 0 0 .08rem var(--line);padding:1.8rem 2.2rem;width:min(44rem,100%)}
+.badge{display:inline-block;background:var(--indigo);color:#fff;font-weight:800;border-radius:2rem;padding:.1rem .8rem;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase}
+#start h1{margin:.5rem 0 .2rem;font-size:1.9rem;line-height:1.15}
+.teamcount{display:flex;gap:.6rem;margin:.6rem 0 1rem}
+.teamcount .btn{flex:1}.teamcount .btn[aria-pressed=true]{background:var(--indigo);color:#fff}
+.names{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:1.2rem}
+.names label{display:flex;align-items:center;gap:.5rem;border:.12rem solid var(--tc);border-radius:.7rem;padding:.2rem .5rem;background:#fff}
+.names i{width:1rem;height:1rem;border-radius:50%;background:var(--tc);flex:none}
+.names input{font:inherit;font-weight:700;border:0;width:100%;min-width:0;padding:.3rem;color:var(--navy);background:transparent}
+.hint{font-size:.62rem;color:var(--mut);margin:.8rem 0 0}
+/* top bar */
+.top{display:flex;align-items:center;gap:.6rem;padding:.6rem 1rem .2rem}
+.top .ttl{font-weight:800;font-size:.7rem;color:var(--mut);flex:none;max-width:22%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.teams{display:flex;gap:.6rem;flex:1;min-width:0}
+.team{flex:1;min-width:0;display:flex;align-items:center;gap:.5rem;background:#fff;border:.14rem solid var(--tc);border-radius:.8rem;padding:.25rem .7rem;position:relative;text-align:left;transition:transform .15s,box-shadow .15s}
+.team .nm{font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1;font-size:.8rem}
+.team .sc{font-weight:900;font-size:1.25rem;color:var(--tc);font-variant-numeric:tabular-nums}
+.team.sel{background:var(--tc);color:#fff;transform:translateY(-2px);box-shadow:0 .3rem 1rem rgba(0,0,0,.25)}
+.team.sel .sc{color:#fff}
+.team kbd{font:700 .5rem monospace;opacity:.6;border:1px solid currentColor;border-radius:.25rem;padding:0 .25rem}
+.team.lead::after{content:"👑";position:absolute;left:-.3rem;top:-.75rem;font-size:.9rem}
+.plus{position:absolute;left:50%;margin-left:-1.5rem;top:-1.1rem;z-index:3;font-weight:900;color:var(--ok);background:#fff;border-radius:1rem;padding:0 .5rem;font-size:.9rem;animation:rise 1.4s forwards;pointer-events:none;box-shadow:0 0 0 .08rem var(--ok) inset}
+@keyframes rise{0%{transform:translateY(.6rem) scale(.6);opacity:0}20%{opacity:1;transform:scale(1.15)}100%{transform:translateY(-1.6rem);opacity:0}}
+/* question */
+#play{padding:0 1rem 3.6rem;gap:.6rem}
+.qhead{display:flex;align-items:center;gap:.8rem;margin-top:.3rem}
+.qno{font-weight:800;color:var(--indigo);font-size:.75rem;white-space:nowrap}
+.qtype{font-size:.6rem;font-weight:800;background:var(--gold);color:#2b1c00;border-radius:.4rem;padding:.05rem .5rem;white-space:nowrap}
+.prog{flex:1;height:.4rem;background:var(--line);border-radius:1rem;overflow:hidden}.prog b{display:block;height:100%;background:var(--teal);transition:width .4s}
+.main{flex:1;display:grid;grid-template-columns:1fr 6.2rem;gap:1rem;align-items:start}
+.qtext{font-size:1.5rem;font-weight:700;line-height:1.3;background:#fff;border-radius:1rem;padding:1rem 1.3rem;box-shadow:0 .2rem 1rem rgba(31,58,95,.1),0 0 0 .08rem var(--line);border-left:.45rem solid var(--indigo);min-height:4.2rem}
+.qtext.long{font-size:1.25rem}
+.ring{width:6.2rem;height:6.2rem;position:relative;flex:none}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring circle{fill:#fff;stroke-width:9}
+.ring .bg{stroke:var(--line)}.ring .fg{stroke:var(--teal);fill:none;stroke-linecap:round;transition:stroke .3s}
+.ring .num{position:absolute;inset:0;display:grid;place-items:center;font-weight:900;font-size:1.8rem;font-variant-numeric:tabular-nums}
+.ring.warn .fg{stroke:var(--gold)}.ring.low .fg{stroke:var(--coral)}.ring.low .num{color:var(--coral);animation:pulse .5s infinite alternate}
+.ring.off .num{color:var(--mut)}
+@keyframes pulse{to{transform:scale(1.15)}}
+.paused{font-size:.55rem;font-weight:800;color:var(--coral);text-align:center;height:.9rem;margin-top:.1rem}
+.opts{display:grid;gap:.7rem;margin-top:.8rem}
+.opts.c2{grid-template-columns:1fr 1fr}
+.opts.pick{grid-template-columns:repeat(auto-fill,minmax(9.5rem,1fr))}
+.opt{display:flex;align-items:center;gap:.8rem;text-align:left;background:#fff;border:0;border-radius:.9rem;padding:.7rem 1rem;font-size:1.3rem;font-weight:700;min-height:3.6rem;box-shadow:0 .15rem 0 rgba(31,58,95,.18),0 0 0 .13rem var(--line) inset;transition:transform .12s,background .2s}
+.opt:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 .3rem 0 rgba(31,58,95,.18),0 0 0 .13rem var(--indigo) inset}
+.opt .k{flex:none;width:2.1rem;height:2.1rem;border-radius:.6rem;display:grid;place-items:center;background:var(--oc);color:#fff;font-weight:900;font-size:1rem}
+.opt:nth-child(1){--oc:var(--coral)}.opt:nth-child(2){--oc:var(--teal)}.opt:nth-child(3){--oc:var(--indigo)}.opt:nth-child(4){--oc:var(--gold)}
+.opts.tf .opt{justify-content:center;font-size:1.7rem;min-height:4.6rem}
+.opts.pick .opt{justify-content:center;font-size:1.5rem}
+.opts.pick .opt .k{display:none}
+.opt.chosen{box-shadow:0 0 0 .2rem var(--indigo) inset;background:#ECECFA}
+.opt:disabled{cursor:default}
+.opt.right{background:var(--okbg);color:#064d2d;box-shadow:0 0 0 .22rem var(--ok) inset,0 0 1.6rem rgba(14,124,74,.55);animation:glow 1s ease-out}
+.opt.wrong{background:var(--badbg);color:#7b1f0e;box-shadow:0 0 0 .22rem var(--bad) inset;animation:shake .5s}
+.opt.miss{background:var(--okbg);box-shadow:0 0 0 .2rem var(--ok) inset;border-style:dashed}
+.opt.dim{opacity:.45}
+.opt .mark{margin-left:auto;font-size:1.3rem}.opt .mark:empty{display:none}
+@keyframes shake{0%,100%{transform:none}20%{transform:translateX(-.5rem)}40%{transform:translateX(.5rem)}60%{transform:translateX(-.35rem)}80%{transform:translateX(.35rem)}}
+@keyframes glow{0%{transform:scale(1)}30%{transform:scale(1.04)}100%{transform:scale(1)}}
+.fillbox{margin-top:.8rem;border:.18rem dashed var(--line);border-radius:1rem;padding:1.1rem 1.4rem;font-size:1.5rem;font-weight:800;text-align:center;color:var(--mut);background:rgba(255,255,255,.6)}
+.fillbox.shown{border:.2rem solid var(--ok);background:var(--okbg);color:#064d2d;animation:glow 1s}
+.expl{margin-top:.8rem;background:#FFF6E0;border-left:.4rem solid var(--gold);border-radius:.7rem;padding:.7rem 1.1rem;font-size:1.05rem;display:none}
+.expl.on{display:block;animation:fadein .4s}
+@keyframes fadein{from{opacity:0;transform:translateY(.5rem)}}
+.verdict{font-weight:900;font-size:1rem;margin-top:.7rem;display:none}
+.verdict.on{display:block}.verdict.ok{color:var(--ok)}.verdict.no{color:var(--bad)}
+.ctrl{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;padding-top:.3rem}
+.ctrl .grow{flex:1}
+.who{font-size:.8rem;font-weight:700;color:var(--mut)}
+.who b{color:var(--navy)}
+#snd{position:fixed;right:.7rem;bottom:.6rem;z-index:5;font-size:.9rem;padding:.3rem .8rem;min-height:2.2rem}
+/* final */
+#final{align-items:center;padding:1.5rem 1rem 4rem;text-align:center}
+#final h1{margin:.2rem 0;font-size:2.2rem}
+.podium{display:flex;align-items:flex-end;justify-content:center;gap:.8rem;margin:1.2rem 0 1.5rem;width:min(52rem,100%)}
+.pod{flex:1;max-width:13rem;display:flex;flex-direction:column;align-items:center}
+.pod .pn{font-weight:900;font-size:1.1rem;word-break:break-word}
+.pod .ps{font-weight:900;font-size:1.5rem;color:var(--tc)}
+.pod .bar{width:100%;background:var(--tc);color:#fff;border-radius:.8rem .8rem 0 0;display:grid;place-items:start center;padding-top:.5rem;font-weight:900;font-size:2rem;transform-origin:bottom;animation:grow .9s cubic-bezier(.2,1.2,.4,1) backwards}
+@keyframes grow{from{transform:scaleY(0)}}
+.conf{position:fixed;top:-1.5rem;width:.7rem;height:1.1rem;z-index:20;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translate3d(var(--dx),110vh,0) rotate(900deg)}}
+#err{max-width:34rem;margin:auto;padding:2rem;text-align:center}
+@media (max-width:760px){
+ .top{flex-wrap:wrap}.top .ttl{display:none}
+ .teams{flex-wrap:wrap}.team{flex:1 1 44%}.team kbd{display:none}
+ .main{grid-template-columns:1fr}
+ .main{position:relative}.ring{position:absolute;right:.6rem;top:.6rem;width:3.4rem;height:3.4rem;z-index:2}.ring .num{font-size:1.1rem}.ring circle{stroke-width:11}
+ .qtext{padding-right:4.6rem;font-size:1.2rem}
+ .opts.c2{grid-template-columns:1fr}.opts.tf.c2{grid-template-columns:1fr 1fr}
+ .card{padding:1.2rem}.names{grid-template-columns:1fr}
+ .paused{position:absolute;right:.2rem;top:4.1rem;z-index:2}
+ #play{position:relative}.hide-sm{display:none}
+ .opt{font-size:1.1rem}
+}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01s!important}}
+</style>
+</head>
+<body>
+<div id="app">
+ <div id="start" class="screen">
+  <div class="card">
+   <span class="badge" id="sBadge">Ai nhanh hơn</span>
+   <h1 id="sTitle"></h1>
+   <div class="sub" id="sSub"></div>
+   <p style="margin:1rem 0 0;font-weight:800">Số đội chơi</p>
+   <div class="teamcount" id="tc"></div>
+   <div class="names" id="names"></div>
+   <button class="btn gold" id="go" style="width:100%;font-size:1.2rem">▶ Bắt đầu</button>
+   <p class="hint">Giáo viên điều khiển: chọn tổ trả lời nhanh nhất → bấm đáp án của tổ đó → xem kết quả. Phím: Space/→ tiếp, 1–4 đáp án, Q W E R chọn tổ, 0 không ai, T tạm dừng.</p>
+  </div>
+ </div>
+
+ <div id="play" class="screen">
+  <div class="top">
+   <div class="ttl" id="pTitle"></div>
+   <div class="teams" id="teams"></div>
+  </div>
+  <div class="qhead"><span class="qno" id="qno"></span><span class="qtype" id="qtype"></span><div class="prog"><b id="prog"></b></div></div>
+  <div class="main">
+   <div>
+    <div class="qtext" id="qtext"></div>
+    <div class="opts" id="opts"></div>
+    <div class="verdict" id="verdict"></div>
+    <div class="expl" id="expl"></div>
+   </div>
+   <div>
+    <div class="ring" id="ring"><svg viewBox="0 0 100 100"><circle class="bg" cx="50" cy="50" r="42"/><circle class="fg" id="arc" cx="50" cy="50" r="42" stroke-dasharray="263.9" stroke-dashoffset="0"/></svg><div class="num" id="tnum"></div></div>
+    <div class="paused" id="paused"></div>
+   </div>
+  </div>
+  <div class="ctrl">
+   <span class="who" id="who"></span><span class="grow"></span>
+   <button class="btn" id="none">Không ai trả lời (0)</button>
+   <button class="btn" id="pauseBtn">⏸ Tạm dừng (T)</button>
+   <button class="btn gold" id="reveal">Hiện đáp án</button>
+   <button class="btn pri" id="next">Câu tiếp →</button>
+  </div>
+ </div>
+
+ <div id="final" class="screen">
+  <span class="badge">Kết thúc</span>
+  <h1 id="fTitle">Bảng xếp hạng</h1>
+  <div class="sub" id="fSub"></div>
+  <div class="podium" id="podium"></div>
+  <div><button class="btn gold" id="again">↺ Chơi lại</button></div>
+ </div>
+ <div id="errwrap" class="screen"><div id="err" class="card"></div></div>
+</div>
+<button class="btn" id="snd" aria-label="Bật hoặc tắt âm thanh">🔊 Âm thanh</button>
+
+<script>
+'use strict';
+const LIB='https://pub-67aa60f95e4140dfbc58b0df90062a85.r2.dev/audio-library/';
+const $=s=>document.querySelector(s);
+const COLORS=['#D9573B','#12867A','#4B4FB8','#E9A23B'];
+const KEYS=['Q','W','E','R'];
+/* ---------- audio (plays only after a click; same approach as dua-vit) ---------- */
+let soundOn=true; try{soundOn=localStorage.getItem('quizSound')!=='off'}catch(e){}
+const cache={};
+function aud(p,vol=1){const a=cache[p]??(cache[p]=new Audio(LIB+p));a.volume=vol;return a}
+function play(p,vol=1){if(!soundOn)return Promise.resolve();const a=aud(p,vol);a.loop=false;try{a.currentTime=0}catch(e){}return a.play().then(()=>new Promise(r=>{a.onended=r;a.onerror=r})).catch(()=>{})}
+function loop(p,vol){if(!soundOn)return;const a=aud(p,vol);a.loop=true;try{a.currentTime=0}catch(e){}a.play().catch(()=>{})}
+function stop(p){const a=cache[p];if(a){a.pause();a.loop=false}}
+const MUSIC='music/game-show-do-vui.mp3',TICK='sfx/dong-ho-tich-tac.mp3',URGENT='sfx/thoi-gian-sap-het.mp3';
+const PRAISE=['voice/co-giao/chinh-xac.mp3','voice/co-giao/rat-tot.mp3','voice/co-giao/tuyet-voi.mp3','voice/co-giao/gioi-lam.mp3','voice/co-giao/xuat-sac.mp3'];
+const PRETRY=['voice/co-giao/chua-dung.mp3','voice/mc-su-kien/rat-tiec.mp3','voice/co-giao/co-gang.mp3'];
+let rot=0;const pick=a=>a[rot++%a.length];
+function preload(){['sfx/dung-roi.mp3','sfx/sai-roi.mp3',TICK,URGENT,'sfx/vo-tay-lon.mp3','sfx/phao-giay.mp3','sfx/trong-hoi.mp3',...PRAISE,...PRETRY,'voice/co-giao/het-gio.mp3'].forEach(p=>{const a=aud(p);a.preload='auto';a.load()})}
+$('#snd').onclick=()=>{soundOn=!soundOn;try{localStorage.setItem('quizSound',soundOn?'on':'off')}catch(e){}
+ if(!soundOn)Object.values(cache).forEach(a=>a.pause());else if(S.phase==='ask'||S.phase==='revealed')loop(MUSIC,.14);
+ $('#snd').textContent=soundOn?'🔊 Âm thanh':'🔇 Tắt tiếng'};
+$('#snd').textContent=soundOn?'🔊 Âm thanh':'🔇 Tắt tiếng';
+
+/* ---------- text markup: *italic*, **bold**, x^2, x^{10} ---------- */
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function mk(s){
+ let t=esc(s).replace(/\\\*/g,'\u0001');
+ t=t.replace(/\*\*(?=\S)(.+?)(?<=\S)\*\*/g,'<b>$1</b>');
+ t=t.replace(/(?<![ℕ\w*])\*(?=[^\s*])([^*]+?)\*/g,'<i>$1</i>');
+ t=t.replace(/\^\{([^}]+)\}/g,'<sup>$1</sup>').replace(/\^([\w+\-]+)/g,'<sup>$1</sup>');
+ return t.replace(/\u0001/g,'*');
+}
+const plain=s=>String(s).replace(/\*\*|\\\*/g,'').replace(/(?<![ℕ\w*])\*([^*]+)\*/g,'$1');
+
+/* ---------- state ---------- */
+let SET=null;
+const S={phase:'start',teams:[],qi:0,team:null,given:null,sel:new Set(),tLeft:0,tTotal:0,tLast:0,paused:false,raf:0,expired:false,n:2};
+const TYPES={mcq:'Trắc nghiệm',tf:'Đúng / Sai',pick:'Chọn tất cả',fill:'Điền đáp án'};
+const show=id=>{document.querySelectorAll('.screen').forEach(e=>e.classList.toggle('on',e.id===id))};
+
+async function boot(){
+ const id=new URLSearchParams(location.search).get('set');
+ try{
+  if(!id||!/^[\w.-]+$/.test(id))throw new Error('Thiếu tham số ?set=tên-bộ-câu-hỏi');
+  const r=await fetch('quiz/'+id+'.json');if(!r.ok)throw new Error('Không tìm thấy quiz/'+id+'.json');
+  SET=await r.json();if(!Array.isArray(SET.questions)||!SET.questions.length)throw new Error('File JSON không có câu hỏi');
+ }catch(e){$('#err').innerHTML='<h2>Không tải được bộ câu hỏi</h2><p>'+esc(e.message)+'</p><p class="sub">Dùng dạng quiz.html?set=toan6-b01</p>';show('errwrap');return}
+ document.title=plain(SET.title)+' – Ai nhanh hơn';
+ $('#sTitle').innerHTML=mk(SET.title);$('#sSub').textContent=[SET.subtitle,SET.questions.length+' câu hỏi'].filter(Boolean).join(' · ');
+ $('#pTitle').textContent=plain(SET.title);
+ setCount(2);show('start');
+}
+function setCount(n){
+ S.n=n;const old=[...document.querySelectorAll('#names input')].map(i=>i.value);
+ $('#tc').innerHTML=[2,3,4].map(k=>`<button class="btn" aria-pressed="${k===n}" data-n="${k}">${k} tổ</button>`).join('');
+ $('#tc').querySelectorAll('button').forEach(b=>b.onclick=()=>setCount(+b.dataset.n));
+ $('#names').innerHTML=Array.from({length:n},(_,i)=>`<label style="--tc:${COLORS[i]}"><i></i><input maxlength="18" value="${esc(old[i]||'Tổ '+(i+1))}" aria-label="Tên đội ${i+1}"></label>`).join('');
+}
+$('#go').onclick=()=>{
+ S.teams=[...document.querySelectorAll('#names input')].map((inp,i)=>({name:inp.value.trim()||'Tổ '+(i+1),score:0,color:COLORS[i]}));
+ S.qi=0;preload();loop(MUSIC,.14);play('voice/mc-su-kien/tro-choi-bat-dau.mp3',.9);show('play');renderTeams();ask();
+};
+$('#again').onclick=()=>{stopAll();show('start')};
+function stopAll(){cancelAnimationFrame(S.raf);Object.values(cache).forEach(a=>{a.pause()});S.phase='start'}
+
+function renderTeams(){
+ const max=Math.max(...S.teams.map(t=>t.score));
+ $('#teams').innerHTML=S.teams.map((t,i)=>`<button class="team${S.team===i?' sel':''}${max>0&&t.score===max?' lead':''}" style="--tc:${t.color}" data-i="${i}" aria-pressed="${S.team===i}"><span class="nm">${esc(t.name)}</span><kbd>${KEYS[i]}</kbd><span class="sc">${t.score}</span></button>`).join('');
+ $('#teams').querySelectorAll('.team').forEach(b=>b.onclick=()=>chooseTeam(+b.dataset.i));
+}
+function chooseTeam(i){if(S.phase!=='ask')return;S.team=i;renderTeams();updWho()}
+function updWho(){
+ const q=SET.questions[S.qi];
+ $('#who').innerHTML=S.phase==='ask'?(S.team===null?'Chọn tổ giành quyền trả lời ↑':'Tổ trả lời: <b>'+esc(S.teams[S.team].name)+'</b>'+(q.type==='pick'?' · chạm các mục rồi bấm “Chốt”':' · bấm đáp án của tổ')):
+  (S.team===null?'Không có tổ nào trả lời':'Tổ trả lời: <b>'+esc(S.teams[S.team].name)+'</b>');
+}
+
+/* ---------- a question ---------- */
+function ask(){
+ const q=SET.questions[S.qi];S.phase='ask';S.team=null;S.given=null;S.sel=new Set();S.expired=false;S.paused=false;
+ const N=SET.questions.length;
+ $('#qno').textContent='Câu '+(S.qi+1)+'/'+N;$('#qtype').textContent=TYPES[q.type]||q.type;$('#prog').style.width=(S.qi/N*100)+'%';
+ const qt=$('#qtext');qt.innerHTML=mk(q.text);qt.classList.toggle('long',q.text.length>110);
+ const o=$('#opts');o.className='opts';o.innerHTML='';
+ if(q.type==='mcq'){o.classList.add(q.options.length>2?'c2':'c1');q.options.forEach((t,i)=>o.insertAdjacentHTML('beforeend',`<button class="opt" data-i="${i}"><span class="k">${'ABCD'[i]}</span><span>${mk(t)}</span><span class="mark"></span></button>`))}
+ else if(q.type==='tf'){o.classList.add('tf','c2');['Đúng','Sai'].forEach((t,i)=>o.insertAdjacentHTML('beforeend',`<button class="opt" data-i="${i}"><span class="k">${i+1}</span><span>${t}</span><span class="mark"></span></button>`))}
+ else if(q.type==='pick'){o.classList.add('pick');q.items.forEach((t,i)=>o.insertAdjacentHTML('beforeend',`<button class="opt" data-i="${i}"><span>${mk(t)}</span><span class="mark"></span></button>`))}
+ else o.innerHTML='<div class="fillbox" id="fill">Cả lớp suy nghĩ… giáo viên bấm “Hiện đáp án”</div>';
+ if(q.type==='mcq')o.querySelectorAll('.k').forEach((k,i)=>k.textContent=String(i+1));
+ o.querySelectorAll('.opt').forEach(b=>b.onclick=()=>optClick(+b.dataset.i));
+ $('#expl').className='expl';$('#verdict').className='verdict';
+ $('#reveal').textContent=q.type==='pick'?'Chốt đáp án':'Hiện đáp án';$('#reveal').disabled=false;$('#none').disabled=false;
+ $('#next').disabled=true;$('#next').textContent=S.qi===N-1?'Kết thúc 🏆':'Câu tiếp →';
+ $('#pauseBtn').disabled=false;$('#paused').textContent='';
+ renderTeams();updWho();
+ S.tTotal=S.tLeft=q.time||SET.time||20;S.tLast=performance.now();
+ tickOn(false);stop(TICK);stop(URGENT);loop(TICK,.3);drawTimer();
+ cancelAnimationFrame(S.raf);S.raf=requestAnimationFrame(frame);
+ if(S.qi<5&&q.voice!==false)play(`voice/mc-su-kien/cau-hoi-so-${S.qi+1}.mp3`,.8);
+}
+let urgent=false;function tickOn(u){urgent=u}
+function frame(now){
+ if(S.phase!=='ask')return;
+ if(!S.paused){S.tLeft=Math.max(0,S.tLeft-(now-S.tLast)/1000)}
+ S.tLast=now;drawTimer();
+ if(!S.paused&&S.tLeft<=5&&S.tLeft>0&&!urgent){urgent=true;stop(TICK);loop(URGENT,.4)}
+ if(S.tLeft<=0&&!S.expired){S.expired=true;stop(TICK);stop(URGENT);play('voice/co-giao/het-gio.mp3',.9)}
+ S.raf=requestAnimationFrame(frame);
+}
+function drawTimer(){
+ const f=S.tLeft/S.tTotal,r=$('#ring');
+ $('#arc').style.strokeDashoffset=263.9*(1-f);
+ $('#tnum').textContent=S.phase==='ask'||S.phase==='revealed'?Math.ceil(S.tLeft):'';
+ r.className='ring'+(S.tLeft<=5?' low':S.tLeft<=S.tTotal*.4?' warn':'')+(S.phase==='revealed'?' off':'');
+}
+function togglePause(){
+ if(S.phase!=='ask')return;S.paused=!S.paused;$('#paused').textContent=S.paused?'⏸ TẠM DỪNG':'';
+ $('#pauseBtn').textContent=S.paused?'▶ Tiếp tục (T)':'⏸ Tạm dừng (T)';
+ const t=urgent?URGENT:TICK;if(S.paused)cache[t]&&cache[t].pause();else if(S.tLeft>0&&soundOn)cache[t]&&cache[t].play().catch(()=>{});
+}
+$('#pauseBtn').onclick=togglePause;
+$('#none').onclick=()=>{if(S.phase==='ask'){S.team=null;renderTeams();updWho()}};
+
+function optClick(i){
+ const q=SET.questions[S.qi];
+ if(S.phase!=='ask')return;
+ if(q.type==='pick'){S.sel.has(i)?S.sel.delete(i):S.sel.add(i);document.querySelectorAll('#opts .opt').forEach((b,k)=>b.classList.toggle('chosen',S.sel.has(k)));return}
+ reveal(i);
+}
+$('#reveal').onclick=()=>doReveal();
+function doReveal(){const q=SET.questions[S.qi];if(S.phase!=='ask')return;reveal(q.type==='pick'?[...S.sel]:null)}
+function ansIdx(q){return q.type==='mcq'?[q.answer]:q.type==='tf'?[q.answer===true?0:1]:q.type==='pick'?q.answer:[]}
+
+function reveal(given){
+ const q=SET.questions[S.qi];S.phase='revealed';S.given=given;
+ stop(TICK);stop(URGENT);urgent=false;cancelAnimationFrame(S.raf);$('#paused').textContent='';drawTimer();
+ $('#reveal').disabled=true;$('#none').disabled=true;$('#pauseBtn').disabled=true;
+ const bs=[...document.querySelectorAll('#opts .opt')];bs.forEach(b=>b.disabled=true);
+ let ok=null; // null = no answer judged
+ const right=ansIdx(q);
+ if(q.type==='fill'){
+  const f=$('#fill');f.innerHTML=mk(String(q.answer));f.className='fillbox shown';
+  if(S.team!==null){showJudge()}else{ $('#next').disabled=false }
+  play('sfx/nhan-sao.mp3',.5);finishReveal(null);return;
+ }
+ if(q.type==='pick'){
+  const sel=new Set(given);ok=sel.size===right.length&&right.every(i=>sel.has(i));
+  bs.forEach((b,i)=>{const isR=right.includes(i),isS=sel.has(i);b.classList.remove('chosen');
+   if(isR&&isS){b.classList.add('right');b.querySelector('.mark').textContent='✔'}
+   else if(isR){b.classList.add('miss');b.querySelector('.mark').textContent='✔'}
+   else if(isS){b.classList.add('wrong');b.querySelector('.mark').textContent='✖'}
+   else b.classList.add('dim')});
+  if(S.team===null&&sel.size===0)ok=null;
+ }else{
+  ok=given===null?null:right.includes(given);
+  bs.forEach((b,i)=>{const isR=right.includes(i);
+   if(isR){b.classList.add('right');b.querySelector('.mark').textContent='✔'}
+   else if(given===i){b.classList.add('wrong');b.querySelector('.mark').textContent='✖'}
+   else b.classList.add('dim')});
+ }
+ if(ok===null){ // teacher revealed without an answer being given
+  play('sfx/nhan-sao.mp3',.5);
+ }
+ finishReveal(ok);
+}
+function finishReveal(ok){
+ const q=SET.questions[S.qi];
+ if(ok===true){play('sfx/dung-roi.mp3',.7);play(pick(PRAISE),.9)}
+ else if(ok===false){play('sfx/sai-roi.mp3',.6);if(S.team!==null)play(pick(PRETRY),.8)}
+ const v=$('#verdict');
+ if(ok!==null||q.type==='fill'){
+  if(q.type!=='fill'){
+   if(ok&&S.team!==null){award(S.team,q.points??SET.points??10);v.textContent='Chính xác! +'+(q.points??SET.points??10)+' điểm cho '+S.teams[S.team].name;v.className='verdict on ok'}
+   else if(ok){v.textContent='Chính xác!';v.className='verdict on ok'}
+   else{v.textContent=S.team!==null?'Chưa đúng — '+S.teams[S.team].name+' không được điểm':'Chưa đúng';v.className='verdict on no'}
+  }
+ }
+ if(q.explain||q.explanation){const e=$('#expl');e.innerHTML='<b>Giải thích: </b>'+mk(q.explain||q.explanation);e.classList.add('on')}
+ if(q.type!=='fill'||S.team===null)$('#next').disabled=false;
+ updWho();
+}
+function showJudge(){
+ const v=$('#verdict');v.className='verdict on';
+ v.innerHTML=`<span class="who">Tổ <b>${esc(S.teams[S.team].name)}</b> trả lời:</span> <button class="btn" id="jy" style="background:var(--okbg);color:var(--ok)">✔ Đúng (D)</button> <button class="btn" id="jn" style="background:var(--badbg);color:var(--bad)">✖ Sai (S)</button>`;
+ $('#jy').onclick=()=>judge(true);$('#jn').onclick=()=>judge(false);
+}
+function judge(ok){
+ if(!$('#jy'))return;const q=SET.questions[S.qi],p=q.points??SET.points??10,v=$('#verdict');
+ if(ok){award(S.team,p);play('sfx/dung-roi.mp3',.7);play(pick(PRAISE),.9);v.textContent='Chính xác! +'+p+' điểm cho '+S.teams[S.team].name;v.className='verdict on ok'}
+ else{play('sfx/sai-roi.mp3',.6);play(pick(PRETRY),.8);v.textContent='Chưa đúng — không được điểm';v.className='verdict on no'}
+ $('#next').disabled=false;
+}
+function award(i,p){S.teams[i].score+=p;renderTeams();const b=$('#teams').children[i];b.insertAdjacentHTML('beforeend',`<span class="plus">+${p}</span>`)}
+
+$('#next').onclick=next;
+function next(){
+ if(S.phase!=='revealed'||$('#next').disabled)return;
+ if(S.qi>=SET.questions.length-1)return finish();
+ S.qi++;play('sfx/chuyen-canh-trang.mp3',.4);ask();
+}
+
+/* ---------- final ---------- */
+function finish(){
+ stop(MUSIC);stop(TICK);stop(URGENT);S.phase='final';cancelAnimationFrame(S.raf);show('final');
+ const ts=S.teams.map((t,i)=>({...t,i})).sort((a,b)=>b.score-a.score);
+ let rank=0,prev=null;ts.forEach((t,k)=>{if(t.score!==prev){rank=k+1;prev=t.score}t.rank=rank});
+ const top=ts.filter(t=>t.rank===1);
+ $('#fTitle').textContent=top.length>1?'Hòa nhau ở vị trí số 1!':'Chúc mừng '+top[0].name+'!';
+ $('#fSub').textContent=plain(SET.title)+' · '+SET.questions.length+' câu hỏi';
+ // order for podium: 2nd, 1st, 3rd, 4th
+ const order=ts.length>=3?[ts[1],ts[0],ts[2],...ts.slice(3)]:ts.length===2?[ts[1],ts[0]]:ts;
+ const H={1:11,2:8,3:6,4:4.5};
+ $('#podium').innerHTML=order.map((t,k)=>`<div class="pod" style="--tc:${t.color}"><div class="pn">${esc(t.name)}</div><div class="ps">${t.score} đ</div><div class="bar" style="height:${H[Math.min(t.rank,4)]}rem;animation-delay:${.15*k}s">${t.rank===1?'🥇':t.rank===2?'🥈':t.rank===3?'🥉':t.rank}</div></div>`).join('');
+ play('sfx/trong-hoi.mp3',.7).then(()=>{if(S.phase!=='final')return;confetti();play('sfx/phao-giay.mp3',.6);play('sfx/vo-tay-lon.mp3',.7);});
+ setTimeout(()=>{if(S.phase==='final'&&!document.querySelector('.conf'))confetti()},3500);
+}
+function confetti(){
+ let s=7;const r=()=>(s=(s*16807)%2147483647)/2147483647;
+ for(let i=0;i<150;i++){const c=document.createElement('div');c.className='conf';
+  c.style.left=r()*100+'vw';c.style.background=[...COLORS,'#1F3A5F'][i%5];c.style.setProperty('--dx',(r()*20-10)+'vw');
+  c.style.animationDuration=2.4+r()*2.4+'s';c.style.animationDelay=r()*.8+'s';c.style.borderRadius=i%3?'2px':'50%';
+  document.body.appendChild(c);setTimeout(()=>c.remove(),6500)}
+}
+
+/* ---------- keyboard ---------- */
+document.addEventListener('keydown',e=>{
+ if(e.target.tagName==='INPUT'||e.ctrlKey||e.metaKey||e.altKey)return;
+ const k=e.key.toUpperCase();
+ if(S.phase==='ask'){
+  if(k==='T'){togglePause();return}
+  const ti=KEYS.indexOf(k);if(ti>=0&&ti<S.teams.length){chooseTeam(ti);return}
+  if(k==='0'){$('#none').click();return}
+  if(/^[1-9]$/.test(k)){const b=document.querySelectorAll('#opts .opt')[+k-1];if(b)b.click();return}
+  if(k===' '||k==='ENTER'||k==='ARROWRIGHT'){e.preventDefault();doReveal()}
+ }else if(S.phase==='revealed'){
+  if(k==='D'&&$('#jy'))judge(true);else if(k==='S'&&$('#jy'))judge(false);
+  else if(k===' '||k==='ARROWRIGHT'||k==='ENTER'){e.preventDefault();if(document.activeElement&&document.activeElement.tagName==='BUTTON')document.activeElement.blur();next()}
+ }
+});
+boot();
+</script>
+</body>
+</html>
