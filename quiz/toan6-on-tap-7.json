@@ -1,0 +1,176 @@
+{
+ "title": "Toán 6 – Bài tập cuối chương VII",
+ "subtitle": "Kết nối tri thức · Ôn tập Chương VII",
+ "points": 10,
+ "time": 20,
+ "questions": [
+  {
+   "type": "mcq",
+   "text": "So sánh −7,52 và −7,6:",
+   "options": [
+    "−7,52 > −7,6",
+    "−7,52 < −7,6",
+    "−7,52 = −7,6",
+    "Không so sánh được"
+   ],
+   "answer": 0,
+   "explain": "Bỏ dấu trừ: 7,52 < 7,6 nên −7,52 > −7,6 (hai số âm: số có giá trị tuyệt đối nhỏ hơn thì lớn hơn)."
+  },
+  {
+   "type": "mcq",
+   "text": "Số đối của −4,15 là:",
+   "options": [
+    "−0,415",
+    "4,15",
+    "−4,15",
+    "0,415"
+   ],
+   "answer": 1,
+   "explain": "Số đối của −a là a: số đối của −4,15 là 4,15."
+  },
+  {
+   "type": "tf",
+   "text": "−0,5 < −0,45.",
+   "answer": true,
+   "time": 15,
+   "explain": "Đúng. 0,5 > 0,45 nên −0,5 < −0,45 (hai số âm)."
+  },
+  {
+   "type": "fill",
+   "text": "7.26 a) Tính: 15,3 − 21,5 − 3 · 1,5.",
+   "answer": "−10,7",
+   "time": 45,
+   "explain": "Nhân trước: 3 · 1,5 = 4,5. Rồi 15,3 − 21,5 − 4,5 = −6,2 − 4,5 = −10,7."
+  },
+  {
+   "type": "mcq",
+   "text": "7.26 b) 2 · (4² − 2 · 4,1) + 1,25 : 5 bằng:",
+   "options": [
+    "16,1",
+    "15,35",
+    "15,85",
+    "15,6"
+   ],
+   "answer": 2,
+   "explain": "4² = 16; 2 · 4,1 = 8,2; trong ngoặc 16 − 8,2 = 7,8. Vậy 2 · 7,8 + 1,25 : 5 = 15,6 + 0,25 = 15,85."
+  },
+  {
+   "type": "fill",
+   "text": "7.27 a) Tìm x, biết x − 5,01 = 7,02 − 2 · 1,5.",
+   "answer": "x = 9,03",
+   "time": 45,
+   "explain": "Vế phải: 7,02 − 3 = 4,02. Vậy x = 4,02 + 5,01 = 9,03."
+  },
+  {
+   "type": "fill",
+   "text": "7.27 b) Tìm x, biết x : 2,5 = 1,02 + 3 · 1,5.",
+   "answer": "x = 13,8",
+   "time": 45,
+   "explain": "Vế phải: 1,02 + 4,5 = 5,52. Vậy x = 5,52 · 2,5 = 13,8."
+  },
+  {
+   "type": "mcq",
+   "text": "7.28 a) Làm tròn 127,459 đến hàng phần mười:",
+   "options": [
+    "127,4",
+    "127,46",
+    "127",
+    "127,5"
+   ],
+   "answer": 3,
+   "explain": "Chữ số hàng phần mười là 4, chữ số bên phải là 5 ≥ 5 nên tăng 1: 127,5."
+  },
+  {
+   "type": "mcq",
+   "text": "7.28 b) Làm tròn 152,025 đến hàng chục:",
+   "options": [
+    "152,03",
+    "150",
+    "152",
+    "160"
+   ],
+   "answer": 1,
+   "explain": "Chữ số hàng chục là 5, chữ số bên phải là 2 < 5 nên giữ nguyên, các chữ số sau thay bằng 0: 150."
+  },
+  {
+   "type": "fill",
+   "text": "7.28 c) Làm tròn 15 025 796 đến hàng nghìn.",
+   "answer": "15 026 000",
+   "time": 40,
+   "explain": "Chữ số hàng nghìn là 5, chữ số bên phải là 7 ≥ 5 nên tăng 1 thành 6, rồi thay các chữ số sau bằng 0: 15 026 000."
+  },
+  {
+   "type": "fill",
+   "text": "7.29 Ngựa Thumbelina cao 44,5 cm; Big Jake cao gấp khoảng 4,72 lần. Big Jake cao bao nhiêu xentimét (làm tròn đến hàng đơn vị)?",
+   "answer": "210 cm",
+   "time": 45,
+   "explain": "44,5 · 4,72 = 210,04 ≈ 210 (cm)."
+  },
+  {
+   "type": "fill",
+   "text": "7.30 Con robot giá 300 000 đồng được giảm 15%. Mẹ Việt phải trả bao nhiêu tiền?",
+   "answer": "255 000 đồng",
+   "time": 45,
+   "explain": "Giá sau giảm là 100% − 15% = 85% giá niêm yết: 300 000 · 85 : 100 = 255 000 (đồng)."
+  },
+  {
+   "type": "fill",
+   "text": "7.31 Cầu Bạch Đằng dài khoảng 5,4 km. Trên bản đồ tỉ lệ 1 : 100 000, cầu dài bao nhiêu xentimét?",
+   "answer": "5,4 cm",
+   "time": 40,
+   "explain": "5,4 km = 540 000 cm; 540 000 : 100 000 = 5,4 (cm)."
+  },
+  {
+   "type": "mcq",
+   "text": "Dùng máy tính: 78,74 : 6,35 bằng:",
+   "options": [
+    "124",
+    "12,04",
+    "12,4",
+    "1,24"
+   ],
+   "answer": 2,
+   "explain": "78,74 : 6,35 = 7 874 : 635 = 12,4."
+  },
+  {
+   "type": "fill",
+   "text": "Dùng máy tính: 34,2 · 2,16 = ?",
+   "answer": "73,872",
+   "time": 40,
+   "explain": "34,2 · 2,16 = 73,872 (3 chữ số thập phân: 1 + 2)."
+  },
+  {
+   "type": "tf",
+   "text": "Làm tròn 6,5 đến hàng đơn vị được 6.",
+   "answer": false,
+   "time": 15,
+   "explain": "Sai. Chữ số bên phải là 5 ≥ 5 nên tăng 1: 6,5 ≈ 7."
+  },
+  {
+   "type": "mcq",
+   "text": "Ước lượng 256,3 + 892,37 + 45 bằng cách làm tròn đến hàng đơn vị, ta được gần nhất:",
+   "options": [
+    "1193",
+    "1 100",
+    "1 293",
+    "1 093"
+   ],
+   "answer": 0,
+   "explain": "256 + 892 + 45 = 1 193 (chính xác 1 193,67)."
+  },
+  {
+   "type": "fill",
+   "text": "7.17 b) Tìm 7,5% của 180.",
+   "answer": "13,5",
+   "time": 35,
+   "explain": "180 · 7,5 : 100 = 13,5."
+  },
+  {
+   "type": "fill",
+   "text": "Tân thu được 120 phiếu, bằng 60% số phiếu. Tổng số phiếu là bao nhiêu?",
+   "answer": "200 phiếu",
+   "time": 40,
+   "explain": "120 : 60% = 120 · 100 : 60 = 200 (phiếu)."
+  }
+ ]
+}
