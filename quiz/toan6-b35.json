@@ -1,0 +1,121 @@
+{
+ "title": "Toán 6 – Bài 35. Trung điểm của đoạn thẳng",
+ "subtitle": "Kết nối tri thức · Chương VIII",
+ "points": 10,
+ "time": 20,
+ "questions": [
+  {
+   "type": "mcq",
+   "text": "Điểm I là trung điểm của đoạn thẳng AB khi:",
+   "options": [
+    "I nằm giữa A và B",
+    "IA = IB",
+    "I nằm giữa A, B và IA = IB",
+    "AB = 2 cm"
+   ],
+   "answer": 2,
+   "explain": "Điểm I nằm giữa hai điểm A, B sao cho IA = IB thì I gọi là trung điểm của đoạn thẳng AB. Cần cả hai điều kiện."
+  },
+  {
+   "type": "mcq",
+   "text": "Điểm M là trung điểm của đoạn thẳng AB. Khẳng định nào sau đây đúng?",
+   "options": [
+    "MA = 2 · MB",
+    "MA = MB = AB/2",
+    "AB = MA",
+    "MA + MB = 2 · AB"
+   ],
+   "answer": 1,
+   "explain": "M là trung điểm của AB thì MA = MB = AB/2."
+  },
+  {
+   "type": "mcq",
+   "text": "Đoạn thẳng AB dài 8 cm, M là trung điểm của AB. Độ dài MA là:",
+   "options": [
+    "16 cm",
+    "8 cm",
+    "4 cm",
+    "2 cm"
+   ],
+   "answer": 2,
+   "explain": "MA = AB/2 = 8 : 2 = 4 (cm)."
+  },
+  {
+   "type": "tf",
+   "text": "Trung điểm của đoạn thẳng AB cách đều hai đầu mút A và B.",
+   "answer": true,
+   "time": 15,
+   "explain": "Đúng. Trung điểm M của AB thỏa mãn MA = MB."
+  },
+  {
+   "type": "tf",
+   "text": "Mọi điểm cách đều hai đầu mút A, B của đoạn thẳng AB đều là trung điểm của AB.",
+   "answer": false,
+   "time": 20,
+   "explain": "Sai. Trung điểm còn phải nằm giữa A và B (nằm trên đoạn thẳng AB)."
+  },
+  {
+   "type": "mcq",
+   "text": "Muốn tìm trung điểm của một dải giấy hình đoạn thẳng AB, ta có thể:",
+   "options": [
+    "gấp dải giấy sao cho A trùng B, nếp gấp đi qua trung điểm",
+    "cắt dải giấy làm ba phần bằng nhau",
+    "đo một đầu rồi nhân đôi",
+    "gấp dải giấy cho A trùng C bất kì"
+   ],
+   "answer": 0,
+   "explain": "Gấp đôi dải giấy cho hai đầu mút A, B trùng nhau; nếp gấp đi qua trung điểm của AB."
+  },
+  {
+   "type": "fill",
+   "text": "Một thanh gỗ làm bập bênh dài 3 m. Điểm gắn trục cách mỗi đầu thanh gỗ bao nhiêu mét? (viết số thập phân, dùng dấu phẩy)",
+   "answer": "1,5",
+   "time": 25,
+   "explain": "Trục ở trung điểm nên cách mỗi đầu 3 : 2 = 1,5 (m)."
+  },
+  {
+   "type": "fill",
+   "text": "I là trung điểm của đoạn thẳng AB và AI = 4,5 cm. Tính AB (cm).",
+   "answer": "9",
+   "time": 25,
+   "explain": "AB = 2 · AI = 2 · 4,5 = 9 (cm)."
+  },
+  {
+   "type": "fill",
+   "text": "Cho đoạn thẳng PQ dài 12 đơn vị. E là trung điểm của PQ, F là trung điểm của PE. Tính EF (đơn vị).",
+   "answer": "3",
+   "time": 30,
+   "explain": "PE = 12 : 2 = 6; EF = PE : 2 = 6 : 2 = 3 (đơn vị)."
+  },
+  {
+   "type": "fill",
+   "text": "C là trung điểm của AB, D là trung điểm của AC, CD = 2 cm. Tính AB (cm).",
+   "answer": "8",
+   "time": 30,
+   "explain": "AC = 2 · CD = 4 (cm); AB = 2 · AC = 8 (cm)."
+  },
+  {
+   "type": "fill",
+   "text": "Vòng quay mặt trời có điểm cao nhất cao 60 m, điểm thấp nhất cao 6 m so với mặt đất. Trục vòng quay ở độ cao bao nhiêu mét?",
+   "answer": "33",
+   "time": 30,
+   "explain": "Trục là trung điểm của đoạn nối điểm cao nhất và thấp nhất: (60 + 6) : 2 = 33 (m)."
+  },
+  {
+   "type": "pick",
+   "text": "Biết M là trung điểm của đoạn thẳng AB và AB = 10 cm. Chạm vào **tất cả** các đoạn thẳng có độ dài 5 cm rồi bấm “Chốt”.",
+   "items": [
+    "MA",
+    "MB",
+    "AB",
+    "AM + MB"
+   ],
+   "answer": [
+    0,
+    1
+   ],
+   "time": 25,
+   "explain": "MA = MB = AB/2 = 5 cm. AB = 10 cm và AM + MB = 10 cm."
+  }
+ ]
+}
