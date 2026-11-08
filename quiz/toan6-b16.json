@@ -1,0 +1,137 @@
+{
+ "title": "Toán 6 – Bài 16. Phép nhân số nguyên",
+ "subtitle": "Kết nối tri thức · Chương III",
+ "points": 10,
+ "time": 20,
+ "questions": [
+  {
+   "type": "mcq",
+   "text": "Tích của hai số nguyên **khác dấu** luôn là số nào?",
+   "options": [
+    "Số nguyên dương",
+    "Số 0",
+    "Số nguyên âm",
+    "Có thể âm hoặc dương"
+   ],
+   "answer": 2,
+   "explain": "Muốn nhân hai số nguyên khác dấu, ta nhân phần số tự nhiên rồi đặt dấu “−” trước kết quả. Vậy tích luôn là số nguyên âm."
+  },
+  {
+   "type": "mcq",
+   "text": "Kết quả của (−7) · 6 là:",
+   "options": [
+    "−13",
+    "13",
+    "42",
+    "−42"
+   ],
+   "answer": 3,
+   "explain": "Hai thừa số khác dấu nên tích âm: (−7) · 6 = −(7 · 6) = −42."
+  },
+  {
+   "type": "tf",
+   "text": "Tích của hai số nguyên âm là một số nguyên dương.",
+   "answer": true,
+   "time": 15,
+   "explain": "Đúng. Hai số nguyên cùng dấu thì tích luôn dương: (−m) · (−n) = m · n."
+  },
+  {
+   "type": "mcq",
+   "text": "Kết quả của (−12) · (−5) là:",
+   "options": [
+    "60",
+    "−60",
+    "−17",
+    "17"
+   ],
+   "answer": 0,
+   "explain": "Hai thừa số cùng dấu nên tích dương: (−12) · (−5) = 12 · 5 = 60."
+  },
+  {
+   "type": "mcq",
+   "text": "Bạn Cao ghi ba lần **−15 000** đồng trong sổ chi tiêu. Phép tính nào cho biết tổng các lần ghi?",
+   "options": [
+    "3 + (−15 000)",
+    "3 · (−15 000)",
+    "(−15 000) − 3",
+    "(−15 000) : 3"
+   ],
+   "answer": 1,
+   "explain": "Ba lần ghi −15 000 là 3 · (−15 000) = −45 000, tức là bạn Cao đã chi 45 000 đồng."
+  },
+  {
+   "type": "pick",
+   "text": "Chạm vào **tất cả** các phép tính có kết quả **âm**, rồi bấm “Chốt”.",
+   "items": [
+    "(−4) · 9",
+    "(−4) · (−9)",
+    "4 · (−9)",
+    "4 · 9",
+    "(−1) · 0"
+   ],
+   "answer": [
+    0,
+    2
+   ],
+   "time": 25,
+   "explain": "Khác dấu cho tích âm: (−4) · 9 = −36 và 4 · (−9) = −36. (−4) · (−9) = 36 và 4 · 9 = 36 đều dương; (−1) · 0 = 0."
+  },
+  {
+   "type": "tf",
+   "text": "(−8) · 0 = −8.",
+   "answer": false,
+   "time": 15,
+   "explain": "Sai. Tích của một số nguyên với 0 luôn bằng 0: (−8) · 0 = 0."
+  },
+  {
+   "type": "mcq",
+   "text": "Tích 2 · (−3) · (−5) · (−1) mang dấu gì và bằng bao nhiêu?",
+   "options": [
+    "Âm, bằng −30",
+    "Dương, bằng 30",
+    "Âm, bằng −10",
+    "Dương, bằng 10"
+   ],
+   "answer": 0,
+   "explain": "Có ba thừa số âm (số lẻ) nên tích âm; giá trị tuyệt đối 2 · 3 · 5 · 1 = 30. Vậy tích bằng −30."
+  },
+  {
+   "type": "mcq",
+   "text": "Tính chất nào được dùng trong đẳng thức (−2) · (150 + 14) = (−2) · 150 + (−2) · 14 ?",
+   "options": [
+    "Giao hoán",
+    "Kết hợp",
+    "Phân phối của phép nhân đối với phép cộng",
+    "Nhân với 0"
+   ],
+   "answer": 2,
+   "explain": "a · (b + c) = a · b + a · c là tính chất phân phối của phép nhân đối với phép cộng."
+  },
+  {
+   "type": "fill",
+   "text": "Tính (−25) · (−17) · 4 bằng cách hợp lí.",
+   "answer": "1 700",
+   "time": 30,
+   "explain": "(−25) · (−17) · 4 = (−25) · 4 · (−17) = (−100) · (−17) = 100 · 17 = 1 700."
+  },
+  {
+   "type": "fill",
+   "text": "Tính 4 · (−39) − 4 · (−14).",
+   "answer": "−100",
+   "time": 30,
+   "explain": "= 4 · [(−39) − (−14)] = 4 · (−25) = −100. Hoặc −156 − (−56) = −156 + 56 = −100."
+  },
+  {
+   "type": "mcq",
+   "text": "Cho *n* · *m* = 36 (*n*, *m* là số tự nhiên). Khi đó (−*n*) · (−*m*) bằng:",
+   "options": [
+    "−36",
+    "0",
+    "−72",
+    "36"
+   ],
+   "answer": 3,
+   "explain": "(−n) · (−m) cùng dấu nên bằng n · m = 36 (còn n · (−m) = −36)."
+  }
+ ]
+}
