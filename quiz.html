@@ -123,6 +123,7 @@ sup{font-size:.65em;line-height:0}
  .opt{font-size:1.1rem}
 }
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01s!important}}
+.fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1.05;margin:0 .12em;font-size:.86em}.fr>span:first-child{border-bottom:.08em solid currentColor;padding:0 .15em}
 </style>
 </head>
 <body>
@@ -208,6 +209,9 @@ function mk(s){
  t=t.replace(/\*\*(?=\S)(.+?)(?<=\S)\*\*/g,'<b>$1</b>');
  t=t.replace(/(?<![ℕ\w*])\*(?=[^\s*])([^*]+?)\*/g,'<i>$1</i>');
  t=t.replace(/\^\{([^}]+)\}/g,'<sup>$1</sup>').replace(/\^([\w+\-]+)/g,'<sup>$1</sup>');
+ // fractions: \frac{a}{b} or a/b with integer parts → stacked like the textbook
+ const fr=(n,d)=>'<span class="fr"><span>'+n+'</span><span>'+d+'</span></span>';
+ t=t.replace(/\\frac\{([^}]*)\}\{([^}]*)\}/g,(_,n,d)=>fr(n,d)).replace(/(^|[^\w\/.,])(−?-?\d+)\/(−?-?\d+)(?![\w\/])/g,(_,p,n,d)=>p+fr(n,d));
  return t.replace(/\u0001/g,'*');
 }
 const plain=s=>String(s).replace(/\*\*|\\\*/g,'').replace(/(?<![ℕ\w*])\*([^*]+)\*/g,'$1');
