@@ -1,0 +1,121 @@
+{
+ "title": "Toán 6 – Bài 27. Hai bài toán về phân số",
+ "subtitle": "Kết nối tri thức · Chương VI",
+ "points": 10,
+ "time": 20,
+ "questions": [
+  {
+   "type": "mcq",
+   "text": "Muốn tìm 2/3 của số 120, ta tính:",
+   "options": [
+    "120 · 2/3",
+    "120 : 2/3",
+    "120 + 2/3",
+    "120 − 2/3"
+   ],
+   "answer": 0,
+   "explain": "Biết cả (120), tìm phần (2/3 của nó): ta nhân. 120 · 2/3 = 80."
+  },
+  {
+   "type": "fill",
+   "text": "Tính 3/5 của 25.",
+   "answer": "15",
+   "time": 25,
+   "explain": "25 · 3/5 = 5 · 3 = 15."
+  },
+  {
+   "type": "mcq",
+   "text": "Muốn tìm một số biết 2/5 của số đó bằng 20, ta tính:",
+   "options": [
+    "20 : 2/5",
+    "20 · 2/5",
+    "2/5 : 20",
+    "20 − 2/5"
+   ],
+   "answer": 0,
+   "explain": "Biết giá trị phân số của số cần tìm: ta chia. 20 : 2/5 = 20 · 5/2 = 50."
+  },
+  {
+   "type": "fill",
+   "text": "Tìm một số, biết 3/7 của số đó là 90.",
+   "answer": "210",
+   "time": 30,
+   "explain": "90 : 3/7 = 90 · 7/3 = 210."
+  },
+  {
+   "type": "tf",
+   "text": "3/4 giờ bằng 45 phút.",
+   "answer": true,
+   "time": 15,
+   "explain": "Đúng. 60 · 3/4 = 45 phút."
+  },
+  {
+   "type": "fill",
+   "text": "Tính 1/4 của −8.",
+   "answer": "−2",
+   "time": 25,
+   "explain": "(−8) · 1/4 = −2."
+  },
+  {
+   "type": "mcq",
+   "text": "Tìm một số, biết −115 là 1/4 của số đó. Số đó là:",
+   "options": [
+    "−460",
+    "−28,75",
+    "115",
+    "−119"
+   ],
+   "answer": 0,
+   "explain": "−115 : 1/4 = (−115) · 4 = −460."
+  },
+  {
+   "type": "tf",
+   "text": "Biết 2/5 của một số bằng 20 thì số đó bằng 20 · 2/5 = 8.",
+   "answer": false,
+   "time": 20,
+   "explain": "Sai. Biết giá trị phân số của số đó thì phải chia: 20 : 2/5 = 50. Phép 20 · 2/5 = 8 là tìm 2/5 của 20."
+  },
+  {
+   "type": "fill",
+   "text": "Tàu ngầm có thể lặn sâu tối đa 300 m. Để làm nhiệm vụ, tàu lặn tới độ sâu bằng 2/5 độ sâu tối đa. Hỏi tàu cách mực nước biển bao nhiêu mét?",
+   "answer": "120",
+   "time": 35,
+   "explain": "Tìm 2/5 của 300: 300 · 2/5 = 120 (m)."
+  },
+  {
+   "type": "mcq",
+   "text": "Nga mua quà hết 400 nghìn đồng, bằng 4/5 số tiền Nga tiết kiệm. Nga đã tiết kiệm:",
+   "options": [
+    "500 nghìn đồng",
+    "320 nghìn đồng",
+    "1 600 nghìn đồng",
+    "100 nghìn đồng"
+   ],
+   "answer": 0,
+   "explain": "Biết 4/5 số tiền là 400: số tiền = 400 : 4/5 = 400 · 5/4 = 500 (nghìn đồng)."
+  },
+  {
+   "type": "pick",
+   "text": "Chạm vào **tất cả** các bài toán mà ta phải **chia** cho phân số, rồi bấm “Chốt”.",
+   "items": [
+    "Biết 3/4 số mặt hàng là 6 000, tìm số mặt hàng",
+    "Tìm 2/5 của 30 m",
+    "Biết −36 là 3/8 của một số, tìm số đó",
+    "Tìm 3/4 ha là bao nhiêu mét vuông"
+   ],
+   "answer": [
+    0,
+    2
+   ],
+   "time": 30,
+   "explain": "Biết giá trị phân số của một số, tìm số đó: chia (6 000 : 3/4 = 8 000 và −36 : 3/8 = −96). Hai bài còn lại là tìm giá trị phân số của một số: nhân."
+  },
+  {
+   "type": "fill",
+   "text": "Siêu thị có 3/4 số mặt hàng được giảm giá, khoảng 6 000 mặt hàng. Siêu thị có khoảng bao nhiêu mặt hàng?",
+   "answer": "8 000",
+   "time": 35,
+   "explain": "6 000 : 3/4 = 6 000 · 4/3 = 8 000 (mặt hàng)."
+  }
+ ]
+}
